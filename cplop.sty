@@ -1,0 +1,280 @@
+% MACROS
+
+\newcommand{\pyro}{pyroprint}
+\newcommand{\pyrod}{pyroprinted}
+\newcommand{\pyroing}{pyroprinting}
+\newcommand{\pyros}{pyroprints}
+\newcommand{\spec}{host species}
+\newcommand{\specs}{host species}
+\newcommand{\host}{host animal}
+\newcommand{\hosts}{host animals}
+\newcommand{\isol}{isolate}
+\newcommand{\isols}{isolates}
+
+\newcommand{\isola}{\Isol{} $A$}
+\newcommand{\isolasixt}{\ifmmode \text{\Ssixt{}}_A \else \Ssixt{}$_A$\fi}
+\newcommand{\isolafive}{\ifmmode \text{\Sfive{}}_A \else \Sfive{}$_A$\fi}
+\newcommand{\isolb}{\Isol{} $B$}
+\newcommand{\isolbsixt}{\ifmmode \text{\Ssixt{}}_B \else \Ssixt{}$_B$\fi}
+\newcommand{\isolbfive}{\ifmmode \text{\Sfive{}}_B \else \Sfive{}$_B$\fi}
+\newcommand{\pcisolsixt}{$\pcfunclabel(\isolasixt{},\isolbsixt{})$}
+\newcommand{\pcisolfive}{$\pcfunclabel(\isolafive{},\isolbfive{})$}
+\newcommand{\isolsep}{2}
+
+\newcommand{\Spec}{Host species}
+\newcommand{\Host}{Host animal}
+\newcommand{\Isol}{Isolate}
+\newcommand{\Pyro}{Pyroprint}
+\newcommand{\Pyrod}{Pyroprinted}
+\newcommand{\Pyroing}{Pyroprinting}
+\newcommand{\Specs}{Host species}
+\newcommand{\Hosts}{Host animals}
+\newcommand{\Isols}{Isolates}
+\newcommand{\Pyros}{Pyroprints}
+
+\newcommand{\SPEC}{\ensuremath{\mathcal{S}}}
+\newcommand{\HOST}{\ensuremath{\mathcal{H}}}
+\newcommand{\ISOL}{\ensuremath{\mathcal{I}}}
+\newcommand{\PYRO}{\ensuremath{\mathcal{P}}}
+
+\newcommand{\Compfunc}{Comparison function}
+\newcommand{\Compfuncs}{\Compfunc{}s}
+\newcommand{\compfunc}{comparison function}
+\newcommand{\compfuncs}{\compfunc{}s}
+\newcommand{\Distmetric}{Distance metric}
+\newcommand{\Distmetrics}{Distance metrics}
+\newcommand{\distmetric}{distance metric}
+\newcommand{\distmetrics}{distance metrics}
+\newcommand{\LIB}{\ensuremath{\mathbb{L}}}
+\newcommand{\UNKN}{\ensuremath{\mathbb{U}}}
+\newcommand{\compfunclabel}{\ensuremath{C}}
+\newcommand{\COMP}{\ensuremath{\mathbb{C}}}
+\newcommand{\COMPsixt}{\ensuremath{\COMP_{1}}}
+\newcommand{\COMPfive}{\ensuremath{\COMP_{2}}}
+\newcommand{\MERG}{\ensuremath{\mathbb{M}}}
+\newcommand{\AVG}{\ensuremath{\mathbb{A}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\UNKNOWN}{\ensuremath{u}}
+\newcommand{\KNOWN}{\ensuremath{v}}
+\newcommand{\SOMEPYRO}{\ensuremath{p}}
+\newcommand{\neighborslabel}{\mathbb{N}}
+
+
+\newcommand{\union}{\ensuremath{\cup}}
+\newcommand{\intersection}{\ensuremath{\cap}}
+\newcommand{\intersect}{\intersection{}}
+
+\newcommand{\unknown}{\ensuremath{x}}
+\newcommand{\cluster}{\ensuremath{c}}
+\newcommand{\clustering}{\ensuremath{\mathcal{C}}}
+
+\newcommand{\dbscan}{DBSCAN}
+\newcommand{\dbscanlong}{Density-Based Spatial Clustering of Applications with Noise}
+\newcommand{\ohclust}{\textit{OhClust!}}
+\newcommand{\ohclustlong}{\textbf{O}ntology-Based \textbf{h}ierarchical \textbf{Clust}ering\textbf{!}}
+\newcommand{\dbased}{density-based}
+\newcommand{\Dbased}{Density-based}
+
+\newcommand{\Gsixt}{\textit{16S}}
+\newcommand{\Gtwen}{\textit{23S}}
+\newcommand{\Gfive}{\textit{5S}}
+
+\newcommand{\Ssixtname}{\textit{16S-23S}}
+\newcommand{\Sfivename}{\textit{23S-5S}}
+\newcommand{\Ssixt}{\itsone}
+\newcommand{\Sfive}{\itstwo}
+\newcommand{\itsone}{\its{1}}
+\newcommand{\itstwo}{\its{2}}
+\newcommand{\Ssixtdims}{96}
+\newcommand{\Sfivedims}{94}
+
+\newcommand{\ecoli}{\textit{E. coli}}
+\newcommand{\ecolilong}{\textit{Escherichia coli}}
+
+\renewcommand{\a}{\ensuremath{\alpha}}
+\newcommand{\knnlong}{$k$-nearest neighbors}
+%\newcommand{\knnlong}{\kNNlong}
+\renewcommand{\k}{\texorpdfstring{$k$}{\it k}}
+\newcommand{\kNN}{\k-NN}
+\newcommand{\knn}{\k-nn}
+\newcommand{\kNNlong}{\k-Nearest Neighbors}
+\newcommand{\knclong}{\k-nearest clusters}
+%\newcommand{\knclong}{\kNClong}
+\newcommand{\kNClong}{\k-Nearest Clusters}
+\newcommand{\kNC}{\k-NC}
+\newcommand{\krap}{\k{}-RAP}
+\newcommand{\krapmed}{\kNN{} Resolution Algorithms for Pyroprints}
+\newcommand{\kraplong}{\kNNlong{} Resolution Algorithms for Pyroprints}
+\newcommand{\BSlong}{Bacterial Strain}
+\newcommand{\BSlongs}{Bacterial Strains}
+\newcommand{\bslong}{bacterial strain}
+\newcommand{\bslongs}{bacterial strains}
+\newcommand{\bs}{BS}
+\newcommand{\bss}{BSs}
+\newcommand{\rmean}{Meanwise Resolution}
+\newcommand{\rwinner}{Resolution by Winner}
+\newcommand{\runion}{Resolution by Union}
+\newcommand{\rintersect}{Resolution by Intersection}
+
+\newcommand{\rec}{recall}
+\newcommand{\Rec}{Recall}
+\newcommand{\fmeasure}{$F_1$-measure}
+\newcommand{\Fmeasure}{$F_1$-measure}
+
+\newcommand{\nn}{nearest neighbors}
+\newcommand{\NN}{Nearest Neighbors}
+
+\newcommand{\pcrlong}{polymerase chain reaction}
+\newcommand{\pcr}{PCR}
+\newcommand{\droppings}{the density-based clustering algorithm described in \secref{sec:clustering}}
+
+\newcommand{\slo}{San Luis Obispo}
+\newcommand{\cp}{Cal Poly}
+\newcommand{\cplong}{California Polytechnic State University \slo{}}
+
+\newcommand{\dna}{DNA}
+\newcommand{\rna}{RNA}
+\newcommand{\rrna}{rDNA}
+\newcommand{\rrnalong}{ribosomal RNA operon}
+
+\newcommand{\mst}{MST}
+\newcommand{\mstlong}{microbial source tracking}
+\newcommand{\MSTlong}{Microbial Source Tracking}
+
+\newcommand{\itslong}{internal transcribed spacer}
+\newcommand{\itslongs}{internal transcribed spacers}
+\newcommand{\ITSlong}{Internal Transcribed Spacer}
+\newcommand{\ITSlongs}{Internal Transcribed Spacers}
+\newcommand{\its}[1]{\textit{\itsshort{}-#1}}
+\newcommand{\itsshort}{\textit{ITS}}
+
+\newcommand{\FIBlong}{Fecal Indicator Bacteria}
+\newcommand{\fiblong}{fecal indicator bacteria}
+\newcommand{\fib}{FIB}
+
+\newcommand{\cplop}{C\-PLOP}
+\newcommand{\CPLOPlong}{The Cal Poly Library of Pyroprints}
+\newcommand{\cploplong}{The Cal Poly Library of Pyroprints}
+\newcommand{\libdep}{library-dependent}
+\newcommand{\Libdep}{Library-dependent}
+\newcommand{\libind}{library-independent}
+\newcommand{\Libind}{Library-independent}
+
+\newcommand{\Pearson}{Pearson Correlation Coefficient}
+\newcommand{\Pearsons}{Pearson Correlation Coefficients}
+\newcommand{\pearson}{Pearson correlation coefficient}
+\newcommand{\pearsons}{Pearson correlation coefficients}
+\newcommand{\pcshort}{\pcfunclabel{}}
+\newcommand{\pcfunclabel}{\ensuremath{\rho}}
+\newcommand{\pcfuncdomain}{\ensuremath{\R^n\times\R^n}}
+\newcommand{\pcfunccodomain}{\ensuremath{[0,1]\subset\R}}
+\newcommand{\pca}{\ensuremath{x}}
+\newcommand{\pcb}{\ensuremath{y}}
+\newcommand{\pcveca}{\ensuremath{\vec{\pca}}}
+\newcommand{\pcvecaa}{\ensuremath{\vec{\pca}\,'}}
+\newcommand{\pcvecb}{\ensuremath{\vec{\pcb}}}
+\newcommand{\fullvec}[2]{\ensuremath{(#1_1,\dots,#1_#2)}}
+\newcommand{\pcfuncdef}{\ensuremath{\pcfunclabel{}: \pcfuncdomain{}\rightarrow\pcfunccodomain{}}}
+
+\newcommand{\pcfunc}[2]{\ensuremath{\pcfunclabel{}(\vec{#1}, \vec{#2})}}
+\newcommand{\vecdeflast}[2]{\ensuremath{\vec{#1} = (#1_1, \dots, #1_{#2})}}
+\newcommand{\vecdef}[1]{\ensuremath{\vecdeflast{#1}{n}}}
+%\newcommand{\vecavg}[1]{\ensuremath{E(\vec{#1})}}
+\newcommand{\vecavg}[1]{\ensuremath{\mu_{\vec{#1}}}}
+\newcommand{\stddev}[1]{\ensuremath{\sigma_{#1}}}
+\newcommand{\vecstddev}[1]{\ensuremath{\stddev{\vec{#1}}}}
+\newcommand{\cov}[2]{\ensuremath{\mathit{cov}(#1, #2)}}
+\newcommand{\veccov}[2]{\ensuremath{\cov{\vec{#1}}{\vec{#2}}}}
+
+\newcommand{\pcsixt}{\ensuremath{\pcfunclabel{}_{\text{\Ssixt{}}}}}
+\newcommand{\pcfive}{\ensuremath{\pcfunclabel{}_{\text{\Sfive{}}}}}
+
+\newcommand{\numdims}{\ensuremath{D}}
+
+\newcommand{\pclong}[2]{
+\ensuremath{
+\frac
+{\sum\limits^\numdims{}_{i=1}(#1_i - \vecavg{#1})(#2_i - \vecavg{#2})}
+{\sqrt{\sum\limits^n _{i=1}(#1_i - \vecavg{#1})^2} \sqrt{\sum\limits^n _{i=1}(#2_i - \vecavg{#2})^2}}}}
+
+\newcommand{\pceric}[2]{
+\ensuremath{
+\frac{1}{\numdims{}}\sum_{i=1}^\numdims{}\frac{(#1_i - \vecavg{#1})(#2_i - \vecavg{#2})}{\vecstddev{#1}\cdot \vecstddev{#2}}
+}
+}
+\newcommand{\covfull}[2]{
+\ensuremath{
+\frac{1}{\numdims{}}\sum_{i=1}^\numdims{}(#1_i - \vecavg{#1})(#2_i - \vecavg{#2})
+}
+}
+\newcommand{\stddevfull}[1]{
+\ensuremath{
+\sqrt{\frac{1}{\numdims{}}\sum_{i=1}^\numdims{}(#1_i - \vecavg{#1})^2}
+}
+}
+\newcommand{\zscorefn}{\ensuremath{\mathit{z}}}
+\newcommand{\zscoreeq}[1]{
+\ensuremath{
+\zscorefn{}(#1_i) = \frac{#1_i - \vecavg{#1}}}{\vecstddev{#1}}}
+
+\newcommand{\euczfunclabel}{\ensuremath{\mathit{d}}}
+\newcommand{\euczfunc}[2]{\ensuremath{\euczfunclabel{}(\vec{z}_{\vec{#1}}, \vec{z}_{\vec{#2}})}}
+\newcommand{\eucz}[2]{
+\ensuremath{
+\euczfunc{#1}{#2}
+=
+\sqrt{
+\sum_{i = 1}^{\numdims}(\zscorefn{}(#1_i) - \zscorefn{}(#2_i))^2
+}
+}}
+\newcommand{\euczalternate}[2]{
+\ensuremath{
+\euczfunc{#1}{#2}
+=
+\sqrt{
+2\cdot\numdims{}\cdot\pcfunc{#1}{#2}
+}
+}}
+
+\newcommand{\eps}{\ensuremath{\varepsilon}}
+%\newcommand{\minneigh}{\ensuremath{n}}
+\newcommand{\minneigh}{\texttt{Min\-Pts}}
+\newcommand{\bigo}[1]{\ensuremath{O(#1)}}
+\newcommand{\codefn}[1]{\texttt{#1}}
+
+\newcommand{\trieq}{triangle inequality}
+\newcommand{\euclid}{Euclidean distance}
+\newcommand{\manhattan}{Manhattan distance}
+\newcommand{\zscores}{\zscore{}s}
+\newcommand{\zscore}{$z$-score normalization}
+\newcommand{\clustplop}{\euclid{} \pyro{} \zscores{}}
+
+\newcommand{\ncbilong}{National Center for Biotechnology Information}
+\newcommand{\ncbi}{NCBI}
+\newcommand{\cuda}{CUDA}
+\newcommand{\vitro}{\textit{in-vitro}}
+\newcommand{\Vitro}{\textit{In-vitro}}
+\newcommand{\silico}{\textit{in-silico}}
+\newcommand{\Silico}{\textit{In-silico}}
+\newcommand{\primerfive}{\textit{Primer5}}
+
+\newcommand{\java}{Java}
+\newcommand{\python}{Python 3}
+\newcommand{\matplotlib}{\texttt{matplotlib}}
+\newcommand{\json}{\texttt{json}}
+\newcommand{\csv}{\texttt{csv}}
+\newcommand{\pickle}{\texttt{pickle}}
+\newcommand{\mysql}{MySQL}
+\newcommand{\php}{PHP}
+\newcommand{\gb}[1]{#1GB}
+\newcommand{\ram}{RAM}
+\newcommand{\mapreduce}{\textit{MapReduce}}
+\newcommand{\awslong}{Amazon Web Services}
+\newcommand{\aws}{AWS}
+
+\newcommand{\frontendwidth}{0.9\linewidth}
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
