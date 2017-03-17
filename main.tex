@@ -11,7 +11,7 @@
 % notice. 
 
 \documentclass{beamer}
-
+%%%%% THEME BEGIN %%%%%
 % There are many different themes available for Beamer. A comprehensive
 % list with examples is given here:
 % http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
@@ -27,7 +27,7 @@
 %\usetheme{CambridgeUS}
 %\usetheme{Copenhagen}
 %\usetheme{Darmstadt}
-\usetheme{default}
+%\usetheme{default}
 %\usetheme{Frankfurt}
 %\usetheme{Goettingen}
 %\usetheme{Hannover}
@@ -43,45 +43,81 @@
 %\usetheme{Rochester}
 %\usetheme{Singapore}
 %\usetheme{Szeged}
-%\usetheme{Warsaw}
+\usetheme{Warsaw}
+
+%%%%% CAL POLY COLOR DEFINITIONS
+\usepackage{calpolycolors}
+
+%%%%% CHANGING CRAP
+\makeatletter % Makes @ a usable character (code 11?)
+
+%%%%% OVERALL COLOR SCHEME
+\setbeamercolor{structure}{fg=calpoly@cpgreen}
+
+%%%%% HEADLINE
+\setbeamertemplate{headline}{}
+
+%%%%% TITLE
+\setbeamercolor*{titlelike}{fg=white, bg=calpoly@cpgreen}
+\setbeamercolor{frametitle}{fg=white,bg=calpoly@cpgreen}
+\setbeamercolor{frametitle right}{fg=white,bg=calpoly@cpgreen}
+
+%%%%% ROUNDED TITLE RECTANGLE WITH SHADOW
+%\useinnertheme[shadow=true]{rounded}
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true,shadow=true]
+\setbeamertemplate{sections/subsections in toc}[default]
+\setbeamertemplate{itemize items}[default]
+\setbeamertemplate{enumerate items}[default]
+
+%%%%% SECTION 
+%\setbeamercolor{section in toc}{fg=calpoly@cpgreen}
+\setbeamercolor{section in head/foot}{bg=mcgovern@cpgold}
+
+%%%%% ITEMIZE & ENUMERATE
+\setbeamercolor{itemize item}{fg=mcgovern@cpgold}
+\setbeamercolor{itemize subitem}{parent=itemize item}
+\setbeamercolor{itemize subsubitem}{parent=itemize subitem}
+
+%%%%% BLOCK TITLES
+%\setbeamercolor{block title}{fg=calpoly@cpgreen}
+%\setbeamercolor{block title example}{fg=calpoly@brightgold}
+
+%%%%% NAVIGATION BUTTONS
+\setbeamercolor{navigation symbols}{fg=calpoly@cpgreen, bg=mcgovern@cpgold}
+
+\makeatother % Makes @ a it's normal character (code 12?)
+
+%\usepackage{fontspec}
+%\setmainfont{Avenir}
+%%%%% THEME END %%%%%
+
+%%%%% COLORS
+%\usepackage{xcolor}
+\definecolor{cpgreen}{HTML}{0A7951}
+\definecolor{cpgold}{HTML}{FADA5E}
+
+\usepackage{nth}
 
 \usepackage{cplop}
 
-\title{Investigating The \kraplong{} And Clustering For \BSlongs{}}
+\title[Investigating The \krap{} And Clustering For \bs{}]{Investigating The \kraplong{} And Clustering For \BSlongs{}}
 
 % A subtitle is optional and this may be deleted
-\subtitle{Optional Subtitle}
+\subtitle{Exploring Two \MSTlong{} Methodologies}
 
-\author{Jeffrey D. McGovern\inst{1}}
-% - Give the names in the same order as the appear in the paper.
-% - Use the \inst{?} command only if the authors have different
-%   affiliation.
-
-\institute[\cplong{}] % (optional, but mostly needed)
-{
-  \inst{1}%
-  Department of Computer Science}
-% - Use the \inst command only if there are several affiliations.
-% - Keep it simple, no one is interested in your street address.
-
-\date{Master's Thesis, March 2016}
-% - Either use conference name or its abbreviation.
-% - Not really informative to the audience, more for people (including
-%   yourself) who are reading the slides online
+\author{Jeffrey D. McGovern}
+\institute{
+  \textbf{\cplong{}}
+  \\
+  Computer Science and Software Engineering Department
+}
+\date{Master's Thesis Defense\\March \nth{21} 2016}
 
 \subject{\MSTlong{}}
-% This is only inserted into the PDF information catalog. Can be left
-% out. 
+\pgfdeclareimage[height=0.5cm]{university-logo}{cp-logo-lrg}
+\logo{\pgfuseimage{university-logo}}
 
-% If you have a file called "university-logo-filename.xxx", where xxx
-% is a graphic format that can be processed by latex or pdflatex,
-% resp., then you can add a logo as follows:
-
-% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
-% \logo{\pgfuseimage{university-logo}}
-
-% Delete this, if you do not want the table of contents to pop up at
-% the beginning of each subsection:
+%%%%% Table Contents %%%%%
 \AtBeginSubsection[]
 {
   \begin{frame}<beamer>{Outline}
@@ -89,7 +125,7 @@
   \end{frame}
 }
 
-% Let's get started
+%%%%% BEGIN %%%%%
 \begin{document}
 
 \begin{frame}
