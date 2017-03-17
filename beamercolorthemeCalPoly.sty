@@ -1,0 +1,35 @@
+\mode<presentation>
+\RequirePackage{calpolycolors}
+
+%%%%% OVERALL COLOR SCHEME
+\setbeamercolor{structure}{fg=calpoly@cpgreen}
+
+%%%%% TITLE
+\setbeamercolor*{titlelike}{fg=white, bg=calpoly@cpgreen}
+\setbeamercolor{frametitle}{fg=white,bg=calpoly@cpgreen}
+\setbeamercolor{frametitle right}{fg=white,bg=calpoly@cpgreen}
+
+%%%%% SECTION 
+%\setbeamercolor{section in toc}{fg=calpoly@cpgreen}
+\setbeamercolor{section in head/foot}{bg=mcgovern@cpgold}
+
+%%%%% ITEMIZE & ENUMERATE
+\setbeamercolor{itemize item}{fg=mcgovern@cpgold}
+\setbeamercolor{itemize subitem}{parent=itemize item}
+\setbeamercolor{itemize subsubitem}{parent=itemize subitem}
+
+%%%%% BLOCK TITLES
+%\setbeamercolor{block title}{fg=calpoly@cpgreen}
+\setbeamercolor{block title example}{bg=calpoly@warmgrey}
+\setbeamercolor{block title alerted}{use=structure, fg=structure.fg, bg=mcgovern@cpgold}
+
+%%%%% BLOCK BODIES
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!10!bg}
+
+%%%%% FOOTER
+%\setbeamercolor{frametitle}{parent=subsection in head/foot, use=structure, fg=structure.fg}
+
+%%%%% NAVIGATION BUTTONS
+\setbeamercolor{navigation symbols}{fg=calpoly@cpgreen, bg=mcgovern@cpgold}
+\mode
+<all>
