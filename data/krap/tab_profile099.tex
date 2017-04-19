@@ -1,0 +1,38 @@
+\begin{table}[t]
+\caption{Precision ($P$), Recall ($R$), and $F$-Measure ($F_1$) overall and for particular species at $k$=7, $\alpha=0.99$.}
+\label{tab:profile099}
+\begin{tabular}{lllll}
+\cline{3-5}
+                                  & \multicolumn{1}{l|}{}           & \multicolumn{3}{l|}{Winner}                \\ \hline
+\multicolumn{1}{|l|}{\Spec{}} & \multicolumn{1}{l|}{$|$\Isol{}s$|$} & \multicolumn{1}{c|}{$P$}   & \multicolumn{1}{c|}{$R$}   & \multicolumn{1}{l|}{$F_1$} \\ \hline
+\multicolumn{1}{|l|}{Overall}     & \multicolumn{1}{l|}{4682}            & 0.680 & 0.680 & \multicolumn{1}{l|}{0.680} \\
+\multicolumn{1}{|l|}{Human}       & \multicolumn{1}{l|}{1471}            & 0.780 & 0.872 & \multicolumn{1}{l|}{0.823} \\
+\multicolumn{1}{|l|}{Cow}         & \multicolumn{1}{l|}{1718}            & 0.766 & 0.791 & \multicolumn{1}{l|}{0.778} \\
+\multicolumn{1}{|l|}{Pigeon}      & \multicolumn{1}{l|}{194}             & 0.314 & 0.263 & \multicolumn{1}{l|}{0.286} \\
+\multicolumn{1}{|l|}{Dog}         & \multicolumn{1}{l|}{149}             & 0.527 & 0.401 & \multicolumn{1}{l|}{0.455} \\
+\multicolumn{1}{|l|}{Wild Turkey} & \multicolumn{1}{l|}{72}              & 0.320 & 0.222 & \multicolumn{1}{l|}{0.262} \\
+\multicolumn{1}{|l|}{Chicken}     & \multicolumn{1}{l|}{40}              & 0.167 & 0.100 & \multicolumn{1}{l|}{0.125} \\
+\multicolumn{1}{|l|}{Cat}         & \multicolumn{1}{l|}{39}              & 0.433 & 0.333 & \multicolumn{1}{l|}{0.376} \\
+\multicolumn{1}{|l|}{Bat}         & \multicolumn{1}{l|}{37}              & 0.720 & 0.973 & \multicolumn{1}{l|}{0.828} \\
+\multicolumn{1}{|l|}{Seagull}     & \multicolumn{1}{l|}{11}              & 0.429 & 0.273 & \multicolumn{1}{l|}{0.334} \\ \hline
+\end{tabular}
+
+%\vspace{11pt}
+%\centering
+
+\begin{tabular}{llllllll}
+\cline{3-8}
+                                  & \multicolumn{1}{c|}{}             & \multicolumn{3}{c|}{Union}                 & \multicolumn{3}{c|}{Intersection}          \\ \hline
+\multicolumn{1}{|l|}{\Spec{}} & \multicolumn{1}{l|}{$|$\Isol{}s$|$} & \multicolumn{1}{c|}{$P$}   & \multicolumn{1}{c|}{$R$}   & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c|}{$P$}   & \multicolumn{1}{c|}{$R$}   & \multicolumn{1}{l|}{$F_1$} \\ \hline
+\multicolumn{1}{|l|}{Overall}     & \multicolumn{1}{l|}{4682}         & 0.766 & 0.766 & \multicolumn{1}{l|}{0.766} & 0.859 & 0.859 & \multicolumn{1}{l|}{0.859} \\
+\multicolumn{1}{|l|}{Human}       & \multicolumn{1}{l|}{1471}         & 0.843 & 0.925 & \multicolumn{1}{l|}{0.882} & 0.926 & 0.979 & \multicolumn{1}{l|}{0.952} \\
+\multicolumn{1}{|l|}{Cow}         & \multicolumn{1}{l|}{1718}         & 0.750 & 0.934 & \multicolumn{1}{l|}{0.832} & 0.874 & 0.914 & \multicolumn{1}{l|}{0.894} \\
+\multicolumn{1}{|l|}{Pigeon}      & \multicolumn{1}{l|}{194}          & 0.476 & 0.205 & \multicolumn{1}{l|}{0.287} & 0.611 & 0.468 & \multicolumn{1}{l|}{0.530} \\
+\multicolumn{1}{|l|}{Dog}         & \multicolumn{1}{l|}{149}          & 0.739 & 0.456 & \multicolumn{1}{l|}{0.564} & 0.838 & 0.738 & \multicolumn{1}{l|}{0.785} \\
+\multicolumn{1}{|l|}{Wild Turkey} & \multicolumn{1}{l|}{72}           & 0.719 & 0.319 & \multicolumn{1}{l|}{0.442} & 0.667 & 0.455 & \multicolumn{1}{l|}{0.541} \\
+\multicolumn{1}{|l|}{Chicken}     & \multicolumn{1}{l|}{40}           & 0.000 & 0.000 & \multicolumn{1}{l|}{0.000} & 0.000 & 0.000 & \multicolumn{1}{l|}{0.000} \\
+\multicolumn{1}{|l|}{Cat}         & \multicolumn{1}{l|}{39}           & 0.938 & 0.385 & \multicolumn{1}{l|}{0.546} & 0.909 & 0.588 & \multicolumn{1}{l|}{0.714} \\
+\multicolumn{1}{|l|}{Bat}         & \multicolumn{1}{l|}{37}           & 0.837 & 0.973 & \multicolumn{1}{l|}{0.900} & 0.973 & 1.000 & \multicolumn{1}{l|}{0.986} \\
+\multicolumn{1}{|l|}{Seagull}     & \multicolumn{1}{l|}{11}           & 0.000 & 0.000 & \multicolumn{1}{l|}{0.000} &    & 0.000 & \multicolumn{1}{l|}{}   \\ \hline
+\end{tabular}
+\end{table}

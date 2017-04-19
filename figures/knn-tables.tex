@@ -1,0 +1,62 @@
+%%%%%%%%%% TABLES %%%%%%%%%%
+\begin{figure}
+\centering
+\subfloat[For \k{} = 4, the classification for the unknown-class datapoint is \achar{}.]{
+\label{fig:knn:4}
+\centering
+\begin{tabular}{|c|c|c|c|}             \hline
+    \k{} & Class   & Position & Similarity    \\ \hline
+         & \unknownchar{}& (5,5) & 0.000       \\ \hline\hline
+  \rowcolor{\bcolor}  1    & \bchar{}      & (6,6) & 1.414       \\ \hline
+  \rowcolor{\acolor}  \ac2    & \ac\achar{}      & \ac(3,6) & \ac2.236       \\ \hline
+  \rowcolor{\acolor}  \ac3    & \ac\achar{}      & \ac(4,7) & \ac2.236       \\ \hline
+  \rowcolor{\ccolor}  4    & \cchar{}      & (3,3) & 2.828       \\ \hline
+%  \rowcolor{\bcolor}  5    & \bchar{}      & (8,5) & 3.000       \\ \hline
+%  \rowcolor{\bcolor}  6    & \bchar{}      & (6,8) & 3.162       \\ \hline
+%  \rowcolor{\ccolor}  7    & \cchar{}      & (3,2) & 3.606       \\ \hline
+%  \rowcolor{\ccolor}  8    & \cchar{}      & (1,3) & 4.472       \\ \hline
+%  \rowcolor{\ccolor}  9    & \cchar{}      & (1,1) & 5.657       \\ \hline
+%  \rowcolor{\acolor} \ac10    & \ac\achar{}      & \ac(1,10) & \ac6.403       \\ \hline
+\end{tabular}
+}
+\\
+\subfloat[For \k{} = 6, the classification for the unknown-class datapoint is \bchar{}.]{
+\label{fig:knn:6}
+\centering
+\begin{tabular}{|c|c|c|c|}             \hline
+    \k{} & Class   & Position & Similarity    \\ \hline
+         & \unknownchar{}& (5,5) & 0.000       \\ \hline\hline
+  \rowcolor{\bcolor}  1    & \bchar{}      & (6,6) & 1.414       \\ \hline
+  \rowcolor{\acolor}  \ac2    & \ac\achar{}      & \ac(3,6) & \ac2.236       \\ \hline
+  \rowcolor{\acolor}  \ac3    & \ac\achar{}      & \ac(4,7) & \ac2.236       \\ \hline
+  \rowcolor{\ccolor}  4    & \cchar{}      & (3,3) & 2.828       \\ \hline
+  \rowcolor{\bcolor}  5    & \bchar{}      & (8,5) & 3.000       \\ \hline
+  \rowcolor{\bcolor}  6    & \bchar{}      & (6,8) & 3.162       \\ \hline
+%  \rowcolor{\ccolor}  7    & \cchar{}      & (3,2) & 3.606       \\ \hline
+%  \rowcolor{\ccolor}  8    & \cchar{}      & (1,3) & 4.472       \\ \hline
+%  \rowcolor{\ccolor}  9    & \cchar{}      & (1,1) & 5.657       \\ \hline
+%  \rowcolor{\acolor} \ac10    & \ac\achar{}      & \ac(1,10) & \ac6.403       \\ \hline
+\end{tabular}
+}
+\\
+\subfloat[For \k{} = 9, the classification for the unknown-class datapoint is \cchar{}.]{
+\label{fig:knn:9}
+\centering
+\begin{tabular}{|c|c|c|c|}             \hline
+    \k{} & Class   & Position & Similarity    \\ \hline
+         & \unknownchar{}& (5,5) & 0.000       \\ \hline\hline
+  \rowcolor{\bcolor}  1    & \bchar{}      & (6,6) & 1.414       \\ \hline
+  \rowcolor{\acolor}  \ac2    & \ac\achar{}      & \ac(3,6) & \ac2.236       \\ \hline
+  \rowcolor{\acolor}  \ac3    & \ac\achar{}      & \ac(4,7) & \ac2.236       \\ \hline
+  \rowcolor{\ccolor}  4    & \cchar{}      & (3,3) & 2.828       \\ \hline
+  \rowcolor{\bcolor}  5    & \bchar{}      & (8,5) & 3.000       \\ \hline
+  \rowcolor{\bcolor}  6    & \bchar{}      & (6,8) & 3.162       \\ \hline
+  \rowcolor{\ccolor}  7    & \cchar{}      & (3,2) & 3.606       \\ \hline
+  \rowcolor{\ccolor}  8    & \cchar{}      & (1,3) & 4.472       \\ \hline
+  \rowcolor{\ccolor}  9    & \cchar{}      & (1,1) & 5.657       \\ \hline
+  %\rowcolor{\acolor} \ac10    & \ac\achar{}      & \ac(1,10) & \ac6.403       \\ \hline
+\end{tabular}
+}
+\caption{A simple \kNNlong{} example, showing how the resultant classification of an unknown-class datapoint can change simply by adjusting the value of \k{}. This example uses the data in \autoref{fig:knn-graph} with similarity values calculated by the \euclid{} of the two points.}
+\label{fig:knn}
+\end{figure}

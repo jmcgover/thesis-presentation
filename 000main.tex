@@ -1,0 +1,1794 @@
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice. 
+
+%%%%% DOCUMENT CLASS %%%%%
+% Alternatively Comment/Uncomment these two lines 
+% to print out the slides without pause
+\documentclass{beamer}
+%\documentclass[handout]{beamer}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% THEME BEGIN %%%%%
+% There are many different themes available for Beamer. A comprehensive
+% list with examples is given here:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+% You can uncomment the themes below if you would like to use a different
+% one:
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{boxes}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{default}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+
+%%%%% CAL POLY COLOR DEFINITIONS
+%\usepackage{calpolycolors}
+\usetheme{CalPoly}
+
+%%%%% CHANGING CRAP
+%\usepackage{fontspec}
+%\setmainfont{Avenir}
+%%%%% THEME END %%%%%
+%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% PACKAGES %%%%%
+\usepackage{nth}
+\usepackage{hyperref}
+
+\usepackage{graphicx}
+\usepackage{color, colortbl}
+\usepackage{xcolor}
+\definecolor{cpgreen}{HTML}{0A7951}
+\definecolor{cpgold}{HTML}{FADA5E}
+\definecolor{cpgreengold}{HTML}{82AA58}
+
+%\usepackage{CJKutf8}
+
+\usepackage{ifthen}
+\usepackage{calc}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, positioning, arrows.meta}
+\usetikzlibrary{backgrounds}
+  \tikzset{
+    invisible/.style={opacity=0},
+    visible on/.style={alt=#1{}{invisible}},
+    alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+    },
+  }
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.3}
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+%%%%% COLORS
+%\usepackage{xcolor}
+\definecolor{cpgreen}{HTML}{0A7951}
+\definecolor{cpgold}{HTML}{FADA5E}
+
+\makeatletter
+\def\rowcolor{\noalign{\ifnum0=`}\fi\bmr@rowcolor}
+\newcommand<>{\bmr@rowcolor}{%
+    \alt#1%
+        {\global\let\CT@do@color\CT@@do@color\@ifnextchar[\CT@rowa\CT@rowb}% 
+        {\ifnum0=`{\fi}\@gooble@rowcolor}% 
+}
+
+\newcommand{\@gooble@rowcolor}[2][]{\@gooble@rowcolor@}
+\newcommand{\@gooble@rowcolor@}[1][]{\@gooble@rowcolor@@}
+\newcommand{\@gooble@rowcolor@@}[1][]{\ignorespaces}
+\makeatother
+
+%%%%% CUSTOM MACROS %%%%%
+\usepackage{cplop}
+
+%%%%% TITLE/SUBTITLE %%%%%%
+\title[Investigating The \krap{} And Clustering For \bs{}]{Investigating The \kraplong{} And Clustering For \BSlongs{}}
+\subtitle{Exploring Two \MSTlong{} Methodologies}
+
+%%%%% AUTHOR/INSTITUTE %%%%%%
+\author{Jeffrey D. McGovern}
+\institute{
+  \textbf{\cplong{}}
+  \\
+  Computer Science and Software Engineering Department
+}
+%%%%% DATE/CONFERENCE %%%%%%
+\date[March \nth{21} 2016]{Master's Thesis Defense\\March \nth{21} 2016}
+
+%%%%% SUBJECT KEYWORDS %%%%%%
+% Doesn't actually show up on the slides anywhere
+\subject{\MSTlong{}}
+
+%%%%% RECURRING LOGO %%%%%%
+\pgfdeclareimage[height=0.5cm]{university-logo}{cp-logo-lrg}
+\logo{\pgfuseimage{university-logo}}
+
+%%%%% SHOW TABLE CONTENTS %%%%%
+% This block creates a slide right when a new subsection starts.
+% Comment or delete this block to remove this feature.
+\AtBeginSection[]{
+\begin{frame}<beamer>{Outline}
+\small
+    \tableofcontents[currentsection,currentsubsection]
+\end{frame}
+}
+\AtBeginSubsection[]{
+\begin{frame}<beamer>{\insertsection}{\insertsubsection}
+
+\centering
+\Large
+\bfseries
+
+\insertsection
+
+\insertsubsection
+\end{frame}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% BEGIN DOCUMENT %%%%%
+\begin{document}
+
+% SOME DIAGRAMS REQUIRE THIS
+\input{data/histograms-chicken}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Overview}
+\small
+\tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{pics/bishops}
+      \caption*{Bishop's Peak, San Luis Obispo, CA}
+  \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{pics/seven_sisters}
+      \caption*{Nine Sisters, San Luis Obispo, CA}
+  \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MADONNA MOUNTAIN
+\begin{frame}
+  \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{pics/field}
+      \caption*{Madonna Mountain / Cerro San Luis Obispo}
+  \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% AVILA BEACH
+\begin{frame}
+  \begin{figure}
+      \centering
+      \includegraphics[width=\textwidth]{pics/avila}
+      \caption*{Avila Beach, CA}
+  \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BEACH CLOSED
+\begin{frame}
+\begin{center}
+\begin{tikzpicture}
+  \node (img1) {\includegraphics[width=\textwidth]{pics/avila}};
+  %\pause
+  \node[above left of=img1]  (img2) [xshift=-2cm]
+  {\includegraphics[height=3cm]{pics/closed1}};
+  \pause
+  \node[below right of=img1] (img3) [xshift=2cm]
+  {\includegraphics[height=3cm]{pics/closed3}};
+    \pause
+  \node[above right of=img1] (img3) [xshift=2cm]
+  {\includegraphics[height=3cm]{pics/closed2}};
+    \pause
+  \node[below left of=img1]  (img2) [xshift=-1.35cm]
+  {\includegraphics[height=3cm]{pics/closed4}};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FECAL INDICATOR BACTERIA
+\begin{frame}
+\centering
+\begin{tikzpicture}
+  \node (img1) {\includegraphics[width=\textwidth]{pics/ecoli}};
+  \pause
+  \node (img2) [fill=white]
+  {\Huge \textbf{Who Pooped?}};
+  \pause
+  \node (img3) {\includegraphics[height=0.80\textheight]{figures/poo}};
+\end{tikzpicture}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Fecal Contamination}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Fecal Contamination}{Problems}
+{\Large Problems}
+\begin{itemize}
+    \item Dangerous for humans, animals, and ecosystems
+    \begin{itemize}
+        \item Bacteria, viruses, and bacteriophages can cause illness
+        \item Certain bacteria can affect dissolved oxygen levels, harming aquatic life
+        \item Removing bacteria with chemicals can harm aquatic life
+    \end{itemize}
+    \item Affects public and environmental water supplies
+    \begin{itemize}
+        \item Rivers
+        \item Creeks
+        \item Reservoirs
+        \item Lakes
+        \item Beaches
+    \end{itemize}
+    \item Common Solution:
+    \begin{itemize}
+        \item Restrict access
+    \end{itemize}
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Fecal Contamination}{Sources}
+{\Large Sources}
+\begin{itemize}
+    \item Understanding the source is the first step to eliminating current and preventing further contamination
+    \item Contaminants come from many different sources
+    \begin{itemize}
+        \item Wildlife
+        \item Livestock
+        \item Pets
+        \item Humans
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\MSTlong{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\MSTlong{}}
+\begin{block}{\MSTlong{}}
+    Any technique that aims to discover the source \spec{} of biological matter using microbiological lifeforms.
+\end{block}
+\visible<2->{
+\begin{itemize}
+    \item Reliable Fecal Indicator Microbe
+    \visible<3->{
+    \begin{itemize}
+        \item \FIBlong{} (\fib{}) e.g.:
+        \begin{itemize}
+            \item \enterococcus{}
+            \item \bacteroides{}
+            \item \ecolilong{} (\ecoli{})
+        \end{itemize}
+    \end{itemize}
+    }
+    \item Characteristic Representation
+    \visible<4->{
+    \begin{itemize}
+        \item Phenotypic
+        \item Genotypic
+    \end{itemize}
+    }
+    \item Sourcing Methodology
+    \visible<5->{
+    \begin{itemize}
+        \item \LibInd{}
+        \item \LibDep{}
+    \end{itemize}
+    }
+\end{itemize}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\begin{frame}{\MSTlong{}}{Methodologies}
+%\begin{itemize}
+%    \item \LibInd{}
+%    \begin{itemize}
+%        \item Detects certain \fib{} that are known to be unique to particular \spec{}
+%        \item \alert{Usually limited to humans and domesticated animals}
+%    \end{itemize}
+%    \item \LibDep{}
+%    \begin{itemize}
+%        \item Researchers build a library of known \spec{} \fib{}
+%        \item Very flexible --- works for many \spec{}
+%        \item \alert{Takes considerable effort to build}
+%    \end{itemize}
+%\end{itemize}
+%\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\cploplong{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\cplop{}}{\cploplong{}}
+\begin{center}
+\begin{tikzpicture}
+  \node (proc1) 
+  {\includegraphics[width=2.5cm]{pics/process1}};
+  \node[right of=proc1] (proc4) [xshift=1cm]
+  {\includegraphics[width=2.5cm]{pics/process4}};
+
+  \node[right of=proc4] (img1) [xshift=3.5cm]
+  {\includegraphics[width=4cm]{pics/cplop1}};
+  \node[below right of=img1]  (img2) [yshift=-1cm, xshift=.5cm]
+  {\includegraphics[width=4cm]{pics/cplop2}};
+  \node[below right of=img2] (img3)
+  {\includegraphics[width=4cm]{pics/cplop3}};
+  
+  \draw[-{>[scale=2.5,
+          length=2,
+          width=6]},line width=1pt] (proc4) to (img1);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\cploplong{}}
+\begin{block}{\cploplong{} (\cplop{})}
+A database of \ecoli{} \dna{} pyrosequence fingerprints, called \textbf{\pyros{}}, built and maintained by \cp{} students and faculty.
+\end{block}
+\begin{itemize}
+    \item Reliable Fecal Indicator Microbe
+    \begin{itemize}
+        \item \FIBlong{} (\fib{}) e.g.:
+        \begin{itemize}
+            \item \enterococcus{}
+            \item \bacteroides{}
+            \item \bfseries \ecolilong{} (\ecoli{})
+        \end{itemize}
+    \end{itemize}
+    \item Characteristic Representation
+    \begin{itemize}
+        \item Phenotypic
+        \item \bfseries Genotypic (\Pyros{})
+    \end{itemize}
+    \item Sourcing Methodology
+    \begin{itemize}
+        \item \LibInd{}
+        \item \bfseries \LibDep{}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{\protect\textit{E. Coli} \Isols}
+\subsection{Background}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Building \cplop{}}
+Process to build the \cplop{} library:
+\begin{enumerate}
+    \item Collect fecal samples from known \spec{}
+    \item Culture individual (\ecoli{}) \isols{} from fecal matter
+    \item Build a digital representation (\pyros{}) of the \isol{}
+    \item Insert representation (\pyros{}) into \cplop{} database
+\end{enumerate}
+\begin{center}
+Species $\leftarrow$
+%
+Host $\leftarrow$
+%
+Fecal Sample $\leftarrow$
+%
+\Isol{} $\leftarrow$
+%
+\Pyro{}
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{\Isols{}}{Collecting Samples From Known \Spec{}}
+\begin{center}
+{\bfseries
+Species $\leftarrow$
+%
+Host $\leftarrow$
+%
+Fecal Sample $\leftarrow$}
+%
+\Isol{} $\leftarrow$
+%
+\Pyro{}
+\end{center}
+\vfill
+\centering
+\begin{tikzpicture}
+\node (proc1) 
+{\includegraphics[width=3.5cm]{pics/process1}};
+\node[right of=proc1] (proc4) [xshift=3.75cm]
+{\includegraphics[width=3.5cm]{pics/process4}};
+\end{tikzpicture}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{\Isols{}}{Culturing \ecoli{} \Isols{}}
+\begin{center}
+Species $\leftarrow$
+%
+Host $\leftarrow$
+%
+Fecal Sample $\leftarrow$
+%
+{\bfseries \Isol{} $\leftarrow$}
+%
+\Pyro{}
+\end{center}
+\begin{block}{\Isols{}}
+An individual culture (of \ecoli{}) grown from a fecal sample.
+\end{block}
+\centering
+\pause
+\begin{tikzpicture}]
+  \node (petri) at (0,0)
+  {\includegraphics[width=4cm]{pics/petri}};
+  
+  \pause
+  \node[left of=petri] (poo) [xshift=-3cm] {\includegraphics[width=2.5cm]{figures/poo}};
+  \path[->] (-3cm,-0.75cm) edge [bend right, line width=1pt] (-1.25,-0.04);
+  
+  \pause
+  \node[above right of=petri] (isolate_text) [xshift=3cm, yshift=1cm]
+  {\Isol{}};
+  \path[->] (isolate_text) edge [bend left, line width=1pt] (.50,-0.04) ;
+\end{tikzpicture}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{ecoli-diagram-slide}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{\ITSlongs{}}
+\begin{center}
+Species $\leftarrow$
+%
+Host $\leftarrow$
+%
+Fecal Sample $\leftarrow$
+%
+{\bfseries \Isol{} $\leftarrow$}
+%
+\Pyro{}
+\end{center}
+\begin{block}{\ITSlongs{} (\itsshort{})}
+The two, highly variable regions of \dna{} between the \Gsixt{}, \Gtwen{}, and \Gfive{} genes in \ecoli{} and referred to as \Ssixt{} and \Sfive{}.
+\end{block}
+\begin{itemize}
+    \item Do not code for functional products $\Rightarrow$ \textbf{highly variable}
+    \item Any offspring of a microbe inherit \Ssixt{} and \Sfive{}
+    \item Biologists to use them to differentiate between strains
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{\Pyros{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{\Pyro{}}
+\begin{center}
+Species $\leftarrow$
+%
+Host $\leftarrow$
+%
+Fecal Sample $\leftarrow$
+%
+\Isol{} $\leftarrow$
+%
+{\bfseries \Pyro{}}
+\end{center}
+\begin{block}{\Pyro{}}
+The peak light values of the pyrosequencing of one of the \itsshort{} regions in the seven loci of the \ecoli{} genome.
+\end{block}
+Process to build a \pyro{} from an \ecoli{} \isol{}:
+\begin{itemize}
+    \item Purify the \isol{}
+    \item Amplify the \isol{}'s \itsshort{} region (using \pcr{})
+    \item Pyrosequence the amplified \itsshort{} region
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PYRO PROCESS
+\begin{frame}[t]{\ecoli{} \dna{}}{Pyroprinting Process}
+\begin{center}
+Species $\leftarrow$
+%
+Host $\leftarrow$
+%
+Fecal Sample $\leftarrow$
+%
+\Isol{} $\leftarrow$
+%
+{\bfseries \Pyro{}}
+\end{center}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\textwidth]{pics/pyro_process}
+  \caption{The pyroprinting process of an isolate.}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HISTOGRAM
+\begin{frame}[t]{Pyroprint}{Histogram Representation}
+\begin{center}
+Species $\leftarrow$
+%
+Host $\leftarrow$
+%
+Fecal Sample $\leftarrow$
+%
+\Isol{} $\leftarrow$
+%
+{\bfseries \Pyro{}}
+\end{center}
+\begin{center}
+\begin{figure}
+    \includegraphics[width=\textwidth]{pics/pyro1}
+\end{figure}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[t]{Comparing Pyroprints}{\Pearson{}}
+\begin{center}
+Species $\leftarrow$
+%
+Host $\leftarrow$
+%
+Fecal Sample $\leftarrow$
+%
+\Isol{} $\leftarrow$
+%
+{\bfseries \Pyro{}}
+\end{center}
+\centering
+{\Large \bfseries
+\Pearson{}}
+\vfill
+\[
+    \pcfunc{\pca{}}{\pcb{}}
+    =
+    %\pclong{\pcveca}{\pcvecb}
+    \pceric{\pca{}}{\pcb{}}
+    =
+    \frac{\veccov{\pca{}}{\pcb{}}}{\vecstddev{\pca{}}\cdot\vecstddev{\pcb}}
+    %\frac{cov(\vec{u},\vec{p})}{\sigma_{\vec{u}}\cdot %\sigma_{\vec{p}}} 
+\]
+
+\vfill
+\raggedright
+\Pearson{} Values:
+\begin{itemize}
+    \item Close to 1 $\Rightarrow$ highly similar
+    \item Close to 0 $\Rightarrow$ completely dissimilar
+    \item Close to -1 $\Rightarrow$ inversely similar
+\end{itemize}
+\raggedright
+
+Always positive between any two \pyros{} in \cplop{}
+\vfill
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\cplop{} Makeup}
+%\begin{figure}[t]
+    %\centering
+    %\includegraphics[height=0.85\textheight]{figures/bs/species_hist.pdf}
+    %\caption{ A histogram of the number of \isols{} of each species in our study, taken from \cplop{}. There are 4,610 total \isols{} from 53 different \specs{}.}
+    %\label{fig:species}
+%\end{figure}
+\begin{table}[]
+\small
+    \centering
+    \begin{tabular}{|l|r|}
+    \hline
+    \bfseries Host Species & \bfseries Number of \Isols{} \\ \hline\hline
+    Cow & 1,749 \\ \hline
+    Human & 1,643 \\ \hline
+    Ground Squirrel & 196 \\ \hline
+    Pigeon & 196 \\ \hline
+    Dog & 179 \\ \hline
+    Sheep & 94 \\ \hline
+    Wild Turkey & 72 \\ \hline
+    Pig & 66 \\ \hline
+    Horse & 52 \\ \hline
+    Cat & 46 \\ \hline
+    Chicken & 44 \\ \hline
+    Bat & 37 \\ \hline\hline
+    \textit{Other} & \textit{199} \\ \hline\hline
+    \textbf{Total} & \textbf{4,610} \\ \hline
+    %Mountain Lion & 32 \\ \hline
+    %Cliff Sparrow & 28 \\ \hline
+    %Deer & 20 \\ \hline
+    %White Crowned Sparrow & 15 \\ \hline
+    %Opossum & 12 \\ \hline
+    %Seagull & 11 \\ \hline
+    %Sea Otter & 10 \\ \hline
+    %Pelican & 8 \\ \hline
+    %Bear & 6 \\ \hline
+    %Owl & 6 \\ \hline
+    %California Sea Lion & 6 \\ \hline
+    %Red Tailed Hawk & 5 \\ \hline
+    %Grey Fox & 4 \\ \hline
+    %Coyote & 4 \\ \hline
+    %Red-shoulder Hawk & 4 \\ \hline
+    %Rabbit & 4 \\ \hline
+    %Elephant Seal & 4 \\ \hline
+    %Bobcat & 4 \\ \hline
+    %Common Loon & 4 \\ \hline
+    %Great Horned Owl & 4 \\ \hline
+    %Racoon & 4 \\ \hline
+    %Golden Eagle & 3 \\ \hline
+    %American Kestrel & 3 \\ \hline
+    %Mallard Duck & 3 \\ \hline
+    %Deer Mouse & 2 \\ \hline
+    %Tree Swallow & 2 \\ \hline
+    %Red Wind Blackbird & 2 \\ \hline
+    %Eared Grebe & 2 \\ \hline
+    %Crow & 2 \\ \hline
+    %Clark Grebe & 2 \\ \hline
+    %Red Shoulder Hawk & 2 \\ \hline
+    %Surf Scoter & 2 \\ \hline
+    %Red Throated Loon & 2 \\ \hline
+    %Western Kingbird & 2 \\ \hline
+    %Turkey Vulture & 2 \\ \hline
+    %Red-Winged Blackbird & 2 \\ \hline
+    %Sea Lion & 2 \\ \hline
+    %Guinni & 2 \\ \hline
+    %Common Murre & 2 \\ \hline
+    %Cougar & 1 \\ \hline
+    %Orangutan & 1 \\ \hline
+    \end{tabular}
+    %\caption{Caption}
+    \label{tab:cplop:isolates}
+\end{table}
+\vfill
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Empirical Work Performed Using \cplop{}}
+\footnotesize
+\begin{itemize}
+    \item \cite{adams2016using} Using Hadoop to Identify False Positives in Bacterial Strain Typing from DNA Fingerprints 
+    \item \cite{dillard2013coli} \ecoli{} Strain Demographics and Transmission in Cattle
+    \item \cite{dillard2015demographics} Demographics and Transfer of \ecoli{} Within Bos taurus Populations 
+    \item \textcolor<2->{cpgreen}{\cite{moritz2015application} Application of Pyroprinting for Source Tracking of E. coli in Pennington Creek}
+    \item \cite{neal2012demographics} Demographics of \ecoli{} Strains in the Human Gut Using Pyroprints:  A Novel MST Method 
+    \item \cite{neal2013escherichia} \ecolilong{} Strain Diversity in Humans: Effects of Sampling Effort and Methodology 
+    \item \cite{nguyeninvestigating} Investigating the Dominant \ecolilong{} Strain in Lambs and Ewes Using Pyroprinting:  A Novel Method for Strain Identification
+    \item \textcolor<2->{cpgreen}{\cite{shapiro2015source} Source Tracking of Fecal Contamination Along San Luis Obispo (SLO) Creek}
+    \item \cite{vanderkelen2016short} Short Communication:  Typing and Tracking \textit{Bacillaceae} in Raw Milk and Milk Powder Using Pyroprinting
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\MSTlong{} with \cplop{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\MSTlong{} with \cplop{}}{\LibDep{} \mst{}}
+%\begin{block}{\MSTlong{}}
+%    Any technique that aims to discover the source \spec{} of biological matter using microbiological lifeforms.
+%\end{block}
+\textbf{\large \LibDep{} \mst{}}
+
+Given:
+\begin{itemize}
+    \item an unknown \spec{} \fib{} \isol{}
+    \item a library of known \spec{} \fib{} \isols{}
+\end{itemize}
+Goal:
+\begin{itemize}
+    \item  Predict the most likely \spec{} from which the unknown \spec{} \isol{} came
+\end{itemize}
+\vfill
+Features:
+\begin{itemize}
+    \item Similar to a classification technique, wherein we classify the source \spec{} of an unknown \spec{} \isol{}\footnote{also referred to as ``the unknown''}
+\end{itemize}
+%, given a library of known \spec{} \isols{}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\MSTlong{} with \cplop{}}{Goal \& Current Abilities}
+\begin{center}
+\textbf{\large Goal}
+
+%Using a library of known \spec{} \fib{} \isols{}, predict the most likely \spec{} from which the unknown \spec{} \isol{} came
+\begin{center}
+\footnotesize
+Unknown Species $\leftarrow$
+%
+Unknown Host $\leftarrow$
+%
+Fecal Matter $\leftarrow$
+%
+\Isol{} $\leftarrow$
+%
+\Pyro{}
+\end{center}
+Using \cplop{}, predict the most likely \spec{} that produced the fecal matter
+\end{center}
+Currently, \cplop{}:
+\begin{itemize}
+    \item contains \pyros{} of two \itsshort{} regions of \ecoli{} \isols{}
+    \item can tell us how similar \pyros{} are
+    \item can tell us which \spec{} those \isols{} came from
+\end{itemize}
+\end{frame}
+\begin{frame}{\MSTlong{} with \cplop{}}{Our Contributions}
+\textbf{Our Contributions}:
+    \begin{itemize}
+        \item Strain-Based \mst{} Approach Using \cplop{}
+        \item \Isol{}-Based \mst{} Approach Using \cplop{}
+    \end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Strain Typing}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Strain Typing}
+\begin{block}{Strain}
+A \textit{strain} of a species of microbe is a subtype of that species where the microbes in that strain are closely related to each other in some meaningful way.
+\end{block}
+\begin{itemize}
+    \item Microbes descending from the same parent microbe are part of the same a ``group'' or ``family''\footnote{they inherit the \dna{} of their parent}
+    \item Defining strains differs between research groups
+\end{itemize}
+For \mst{}:
+\begin{itemize}
+    \item Strains of \fib{} (like \ecoli{}) tend to stay unique to the \spec{} in which they reside
+\end{itemize}
+In \cplop{}:
+\begin{itemize}
+    \item Use the similarity between \pyros{} of the two \itsshort{} regions of \ecoli{} \isols{} to define strains
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COMPARING ISOLATES
+\begin{frame}{Comparing \Isols{}}
+\begin{figure}
+    \centering
+\begin{tikzpicture}[node distance=.20in]
+    \node (origin) at (0, 0) {};
+    
+    % Isolate A
+    \node (chickenFiveOne) at (-2.25, 1) {
+        \usebox\chickenFiveOne
+    };
+    \node[below of=chickenFiveOne]{\Ssixt{}$_A$};
+    \node (chickenFiveTwo) at (-2.25, -1) {
+        \usebox\chickenFiveTwo
+    };
+    \node[below of=chickenFiveTwo]{\Sfive{}$_A$};
+    \node[above of=chickenFiveOne]{\Isol{} $A$};
+    \draw[dashed] (-4,2) rectangle (-.5,-2);
+    
+    \visible<6->{
+    \node (alpha) at (0,-3) {$\a{} = 0.995$};
+    }
+    
+\visible<2->{
+    % Isolate B
+    \node (chickenSevenOne) at (2.25, 1)  {
+        \usebox\chickenSevenOne
+    };
+    \node[below of=chickenSevenOne]{\Ssixt{}$_B$};
+    \node (chickenSevenTwo) at (2.25, -1) {
+        \usebox\chickenSevenTwo
+    };
+    \node[below of=chickenSevenTwo]{\Sfive{}$_B$};
+    \node[above of=chickenSevenOne]{\Isol{} $B$};
+    \draw[dashed] (4,2) rectangle (.5,-2);
+}
+    % Comparisons
+\visible<3-4>{
+    \path[<->]
+            (chickenFiveOne) 
+            edge[bend right] node[below, fill=white] {$\pcfunclabel(\text{\Ssixt{}}_A,\text{\Ssixt{}}_B)$} 
+            (chickenSevenOne);
+}
+\visible<4>{
+    \path[<->]
+            (chickenFiveTwo) 
+            edge[bend right] node[below, fill=white] {$\pcfunclabel(\text{\Sfive{}}_A,\text{\Sfive{}}_B)$} 
+            (chickenSevenTwo);
+}
+
+\visible<5->{
+    \path[<->]
+            (chickenFiveOne) 
+            edge[bend right] node[below, fill=white] {$\pcfunclabel(\text{\Ssixt{}}_A,\text{\Ssixt{}}_B) > \a{}$} 
+            (chickenSevenOne);
+    \path[<->]
+            (chickenFiveTwo) 
+            edge[bend right] node[below, fill=white] {$\pcfunclabel(\text{\Sfive{}}_A,\text{\Sfive{}}_B) > \a{}$} 
+            (chickenSevenTwo);
+}
+\end{tikzpicture}
+    \caption{Comparing \isols{} involves comparing the \pyros{} of each \isol{} using \pcfunclabel{}, the \pearson{}, with the stipulation that one can only compare \pyros{} from the same \itsshort{} in their respective \isol{}. 
+    %The green bar plots represent a \pyro{} of \Ssixt{}, while gold bar plots represent a \pyro{} of \Sfive{}.
+    }
+    \label{fig:isolate_compare}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Strain-Based}
+Our strain-based \mst{} approach
+\begin{enumerate}
+    \item \textbf<2->{Build strains from \fib{} \isols{} in \cplop{}}
+    \item Check if the unknown \isol{} belongs in a strain
+    \item Classify the unknown as the most dominant \spec{} of the strain
+\end{enumerate}
+Relevant computer algorithms
+\begin{itemize}
+    \item Clustering
+\end{itemize}
+\visible<2->{What we focus on:}
+\visible<3->{
+\begin{itemize}
+    \item Building strains
+    \item Studying their properties
+\end{itemize}
+}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Clustering for \BSlongs{}}
+\subsection{Methodology}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Clustering for \BSlongs{}}{\dbscan{}}
+
+\dbscan{}:
+\begin{itemize}
+    \item Density-Based Clustering Algorithm
+    \begin{itemize}
+        \item Eric Johnson made a version for \cplop{} in \cite{johnson2015density}
+    \end{itemize}
+    \item Two Parameters
+    \begin{itemize}
+        \item \minneigh{}
+        \item \eps{}
+    \end{itemize}
+    \item Categorizes data points as one of:
+    \begin{enumerate}
+        \item Core Point
+        \item Border Point
+        \item Noise
+    \end{enumerate}
+    \item Defines a cluster as:
+    \begin{itemize}
+        \item All Core points and their neighboring Core and Border points.
+    \end{itemize}
+    \item Fast as long as \compfunc{} satisfies triangle inequality\footnote{$d(x,z)\leq d(x,y) + d(y,z)$}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\dbscan{}}
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=\textwidth]{pics/dbcluster.png}
+%    \caption{Example density-based cluster with \minneigh{}=3}
+%    \label{fig:my_label}
+%\end{figure}
+\input{figures/density-slides}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{DBSCAN}{Distance Metric Satisfying Triangle Inequality}
+\[
+    \pcfunc{\pca{}}{\pcb{}}
+    =
+    %\pclong{\pcveca}{\pcvecb}
+    \pceric{\pca{}}{\pcb{}}
+    =
+    \frac{\veccov{\pca{}}{\pcb{}}}{\vecstddev{\pca{}}\cdot\vecstddev{\pcb}}
+    %\frac{cov(\vec{u},\vec{p})}{\sigma_{\vec{u}}\cdot %\sigma_{\vec{p}}} 
+\]
+The \zscore{} of \pcveca{} is:
+\[
+\zscoreeq{\pca}
+\]
+Distance Metric:
+\[
+\eucz{\pca}{\pcb}
+\]
+\[
+\euczalternate{\pca}{\pcb}
+\]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{DBSCAN}{Converted $\alpha$ Threshold as \eps{} for Range Querying}
+\begin{table}[]
+\centering
+\caption{Converted $\alpha$ threshold used for \eps{} to fit the new metric space, where \numdims{} is the number of nucleotide dispensations for that \itsshort{}'s \pyro{}.}
+\label{tab:converted_thresholds}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{\itsshort{} Region} & \Ssixt{}     & \Sfive{}     \\
+                            & $\alpha$     & $\alpha$     \\ \hline
+\pcfunc{\pca}{\pcb}         & 0.995        & 0.995        \\ \hline
+\numdims{}                  & \Ssixtdims{} & \Sfivedims{} \\ \hline
+\euczfunc{\pca{}}{\pcb{}}   & 0.9747       & 0.9644       \\ \hline
+\end{tabular}
+\end{table}
+\vfill
+\eps{} Range Query:
+\begin{itemize}
+    \item Returns neighbor \isols{} are within \a{} in \textbf{both} \itsshort{} regions
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Evaluation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Evaluation Metrics}
+Clustering for \mst{} procedure:
+\begin{enumerate}
+    \item Build strains (clusters) from \isols{} in \cplop{} (using \dbscan{})
+    \item Check if the unknown \isol{} belongs in a strain (cluster)
+    \item Classify the unknown as the most dominant \spec{} of the strain (cluster)
+\end{enumerate}
+
+Two Outcomes:
+\begin{itemize}
+    \item \Isol{} is part of a strain (cluster)
+    \item \Isol{} is not part of a strain (categorized as noise)
+\end{itemize}
+
+Evaluation Metrics:
+\begin{itemize}
+    \item Individual Cluster Purity
+    \item Overall Clustering Purity
+    \item Clustering Coverage
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\slice}[4]{
+  \pgfmathparse{0.5*#1+0.5*#2}
+  \let\midangle\pgfmathresult
+
+  % slice
+  \draw[thick,fill=cpgold!40] (0,0) -- (#1:1) arc (#1:#2:1) -- cycle;
+
+  % outer label
+  \node[label=\midangle:#4] at (\midangle:1) {};
+
+  % inner label
+  \pgfmathparse{min((#2-#1-10)/110*(-0.3),0)}
+  \let\temp\pgfmathresult
+  \pgfmathparse{max(\temp,-0.5) + 0.8}
+  \let\innerpos\pgfmathresult
+  \node at (\midangle:\innerpos) {#3};
+}
+
+\begin{frame}[fragile]{Individual Cluster Purity}
+\small
+Consider a cluster $C=\{c_1,\ldots, c_K\}$. Let $s(c)$ refer to the species of isolate $c$.
+Let $m$ be the most dominant species label for data points in $C$, and let the total number of points in
+$C$ with $s(c) = m$ be $s_m$. Then the \textit{individual cluster purity} $\nu$ of cluster $C$ is:
+
+\[
+    \nu(C) = \frac{s_m}{K}
+\]
+\begin{center}
+\begin{tikzpicture}[scale=1.75]
+\newcounter{a}
+\newcounter{b}
+\foreach \p/\t in {47/Dog,38/Chicken,15/Pigeon}
+  {
+    \setcounter{a}{\value{b}}
+    \addtocounter{b}{\p}
+    \slice{\thea/100*360}
+          {\theb/100*360}
+          {\p\%}{\t}
+  }
+
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Overall Clustering Purity}
+Given a \textit{clustering} $\mathcal{C} = \{C_1,\dots,C_n\}$ on a dataset, we define the size $\mathcal{M}$ of the set of clusters: 
+\[
+    \mathcal{M} = \sum_{i = 0}^{n} |C_i|
+\]
+The \textit{overall clustering purity} is:
+\[
+    \sum_{i=1}^{n} \frac{|C_i|}{\mathcal{M}}\cdot\nu(C_i)
+\]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Components Clustering Coverage}
+Number of \isols{} in:
+\begin{enumerate}
+    \item A noise/outlier point
+    \item A  \textit{100\% pure} cluster
+    \item A cluster where its \spec{} is the most dominant
+    \item A cluster where its \spec{} is in minority
+\end{enumerate} 
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Results}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SIZE DSTRIBUTION
+\begin{frame}{Size Distribution}{\minneigh{} = 3}
+    \centering
+    \begin{figure}
+    \includegraphics[width=0.85\linewidth]{figures/bs/neigh_size_3}
+    %\caption{Cluster Size Distribution for \minneigh{} of 3} 
+    \label{fig:big:clust_size_dist_3}
+    \end{figure}
+\end{frame}
+    
+\begin{frame}{Size Distribution}{\minneigh{} = 5}
+    \centering
+    \begin{figure}
+    \includegraphics[width=0.85\linewidth]{figures/bs/neigh_size_5}
+    %\caption{Cluster Size Distribution for \minneigh{} of 5} 
+    \label{fig:big:clust_size_dist_5}
+    \end{figure}
+\end{frame}
+    
+\begin{frame}{Size Distribution}{\minneigh{} = 7}
+    \centering
+    \begin{figure}
+    \includegraphics[width=0.85\linewidth]{figures/bs/neigh_size_7}
+    %\caption{Cluster Size Distribution for \minneigh{} of 7} 
+    \label{fig:big:clust_size_dist_7}
+    \end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SIZE DSTRIBUTION
+\begin{frame}{Size Distribution}
+\begin{figure}[ht!]
+    \centering
+    \begin{subfigure}{0.30\textwidth}
+    \includegraphics[width=\linewidth]{figures/bs/neigh_size_3}
+    %\caption{Cluster Size Distribution for \minneigh{} of 3} 
+    \label{fig:clust_size_dist_3}
+    \end{subfigure}
+    \centering
+    \begin{subfigure}{0.30\textwidth}
+    \includegraphics[width=\linewidth]{figures/bs/neigh_size_5}
+    %\caption{Cluster Size Distribution for \minneigh{} of 5} 
+    \label{fig:clust_size_dist_5}
+    \end{subfigure}
+    \centering
+    \begin{subfigure}{0.30\textwidth}
+    \includegraphics[width=\linewidth]{figures/bs/neigh_size_7}
+    %\caption{Cluster Size Distribution for \minneigh{} of 7} 
+    \label{fig:clust_size_dist_7}
+    \end{subfigure}
+    %\caption{The size distribution of clusters skews heavily towards smaller clusters.}
+    \label{fig:clust_size_dist}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Individual Cluster Purity}{\minneigh{} = 3}
+    \centering
+    \begin{figure}
+    \includegraphics[width=0.85\linewidth]{figures/bs/neigh_dist_data_3}
+    %\caption{Individual Clsuter Purity Distribution for \minneigh{} of 3} 
+    \label{fig:clust_purity_ind_3}
+    \end{figure}
+\end{frame}
+\begin{frame}{Individual Cluster Purity}{\minneigh{} = 5}
+    \centering
+    \begin{figure}
+    \includegraphics[width=0.85\linewidth]{figures/bs/neigh_dist_data_5}
+    \label{fig:clust_purity_ind_5}
+    \end{figure}
+\end{frame}
+\begin{frame}{Individual Cluster Purity}{\minneigh{} = 7}
+    \centering
+    \begin{figure}
+    \includegraphics[width=0.85\linewidth]{figures/bs/neigh_dist_data_7}
+    \label{fig:clust_purity_ind_7}
+    \end{figure}
+    \label{fig:clust_purity_ind}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Individual Cluster Purity}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.85\linewidth]{figures/bs/neigh_purity_unique_3_size}
+    \label{fig:clustered:3}
+\end{figure}
+\begin{tikzpicture}[remember picture,overlay, shift={(current page.center)}]
+\pause
+  \visible<+->{
+    \node[]   (purepoints) at (5cm,0)  {$1,206$};
+    \path[->] (purepoints) edge [bend left, line width=1pt] (4.35cm,-2.5cm);
+  }
+  \visible<+>{
+      \draw[] (2.90cm,-2.30cm) ellipse (1.25cm and 0.25cm);
+  }
+  \visible<+>{
+      \draw[rotate around={-35:(-0.75cm,-1.65cm)}] (-0.75cm,-1.65cm) ellipse (1.35cm and 0.5cm);
+  }
+  \visible<+>{
+    \path[->] (5cm,2cm) edge [bend right, line width=1pt] (0.15cm,1.15cm);
+  }
+  \visible<+>{
+    \path[->] (5cm,2cm) edge [bend right, line width=1pt] (2.25cm,2.75cm);
+  }
+\end{tikzpicture}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Individual Cluster Purity}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.85\linewidth]{figures/bs/neigh_purity_unique_5_size}
+    \label{fig:clustered:5}
+\end{figure}
+\begin{tikzpicture}[remember picture,overlay, shift={(current page.center)}]
+    \node[]   (purepoints) at (5cm,0)  {$990$};
+    \path[->] (purepoints) edge [bend left, line width=1pt] (4.35cm,-2.5cm);
+    \path[->] (5cm,2cm) edge [bend right, line width=1pt] (2.50cm,0.30cm);
+    \path[->] (5cm,2cm) edge [bend right, line width=1pt] (3.15cm,0.0cm);
+\end{tikzpicture}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Individual Cluster Purity}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.85\linewidth]{figures/bs/neigh_purity_unique_7_size}
+    \label{fig:clustered:7}
+\end{figure}
+\begin{tikzpicture}[remember picture,overlay, shift={(current page.center)}]
+    \node[]   (purepoints) at (5cm,0)  {$962$};
+    \path[->] (purepoints) edge [bend left, line width=1pt] (4.35cm,-2.5cm);
+\end{tikzpicture}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Individual Cluster Purity}
+\begin{figure}[ht!]
+    \centering
+    \begin{subfigure}{0.30\textwidth}
+    \includegraphics[width=\linewidth]{figures/bs/neigh_dist_data_3}
+    \label{fig:clust_purity_dist_3}
+    \end{subfigure}
+    \centering
+    \begin{subfigure}{0.30\textwidth}
+    \includegraphics[width=\linewidth]{figures/bs/neigh_dist_data_5}
+    \label{fig:clust_purity_dist_5}
+    \end{subfigure}
+    \centering
+    \begin{subfigure}{0.30\textwidth}
+    \includegraphics[width=\linewidth]{figures/bs/neigh_dist_data_7}
+    \label{fig:clust_purity_dist_7}
+    \end{subfigure}
+    \label{fig:clust_purity_dist}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \begin{subfigure}{0.30\textwidth}
+    \includegraphics[width=\linewidth]{figures/bs/neigh_purity_unique_3_size}
+    \label{fig:clust_pure_3}
+    \end{subfigure}
+    \centering
+    \begin{subfigure}{0.30\textwidth}
+    \includegraphics[width=\linewidth]{figures/bs/neigh_purity_unique_5_size}
+    \label{fig:clust_pure_5}
+    \end{subfigure}
+    \centering
+    \begin{subfigure}{0.30\textwidth}
+    \includegraphics[width=\linewidth]{figures/bs/neigh_purity_unique_7_size}
+    \label{fig:clust_pure_7}
+    \end{subfigure}
+    \label{fig:clust_pure}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Clustering Coverage}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figures/bs/neigh_minor_major_impure_filled_stack}
+    %\caption{As \minneigh{} increases, we see that we cluster fewer \isols{}. throughout, the number of major pure \isols{} stays relatively equal to the number of major impure \isols{}.}
+    \label{fig:clustered}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Overall Clustering Purity vs. \mst{} Accuracy}{Includes Unclustered (Unclassified)}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.75\linewidth]{figures/bs/neigh_clust_accuracy.pdf}
+    %\caption{The overall accuracy decreases as we restrict  \minneigh{}. 
+    %The overall clustering purity stays relatively the same as we increase the value for \minneigh{}. 
+    %That is, for clustered \isols{}, the classification algorithm stays relatively the same relative to the number of isolates accurately clustered.}
+    \label{fig:overall}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Benefits \& Drawbacks}
+Benefits
+\begin{itemize}
+    \item Fast --- Can cluster offline and check membership
+    \item Highly pure clusters 
+    \item Minimal transient strains
+\end{itemize}
+
+Drawbacks
+\begin{itemize}
+    \item Unknown might not be near a cluster
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\Isol{}-Based Approach}
+
+Our \isol{}-based approach:
+\begin{enumerate}
+    \item Find $k$ known \spec{} \isols{} from \cplop{} most similar to it, called the \knnlong{}
+    \item Classify the source \spec{} of the \isol{} as the dominant \spec{} of the \knnlong{}
+\end{enumerate}
+Relevant computer algorithms:
+\begin{itemize}
+    \item The \kNNlong{} Classification Algorithm
+    \begin{itemize}
+        \item \alert{The \knnlong{} may not be strict enough}
+        \item \alert{Can only take one distance metric}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{figures/knn-macros}
+\begin{frame}[t]{\kNNlong{} Classification Algorithm}
+\input{figures/knn-graph}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The \kraplong{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\krap{}}
+\begin{block}{\kraplong{} (\krap{})}
+A set of four resolution strategies designed to resolve the multiple \knnlong{} lists created by multiple \compfuncs{}.
+\end{block}
+What we add to \kNNlong{}:
+\begin{itemize}
+    \item The \knnlong{} may not be strict enough:
+    \begin{itemize}
+        \item \a{} Filtering
+    \end{itemize}
+    \item Two \itsshort{} regions $\Rightarrow$ multiple \compfuncs{}:
+    \begin{itemize}
+        \item \rmean{}
+        \item \rwinner{}
+        \item \runion{}
+        \item \rintersect{}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Methodology}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\a{} Filtering}
+The \knnlong{} may not be strict enough
+
+\a{} Filtering Procedure:
+\begin{enumerate}
+    \item Query for the \knnlong{}
+    \item Filter the \knnlong{} by \a{}
+    \item Classify as the most dominant classification
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\a{} Filtering}
+\a{} = 4.000
+\input{figures/knn-graph-alpha}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\rmean{}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\rmean{}}{Averaging the Similarity Values}
+\begin{figure}
+\centering
+\footnotesize
+\begin{tabular}{c|c|c|c|c|c}
+    \k{} & \Isol{} $x$ & \Spec{} & $\pcsixt(u,x)$ & $\pcfive{}(u,x)$ & $\mathit{mean}(\pcsixt{}, \pcfive{})$  \\ \hline\hline
+    1 & $a$ & \textbf<5->{Cat}  & \textit<2->{0.994} & \textit<3->{0.991} &  \textbf<4->{0.993} \\ \hline
+    2 & $b$ & Dog               & \textit<2->{0.990} & \textit<3->{0.994} &  \textbf<4->{0.992} \\ \hline
+    3 & $c$ & Dog               & \textit<2->{0.995} & \textit<3->{0.989} &  \textbf<4->{0.992} \\ \hline
+    4 & $d$ & Chicken           & \textit<2->{0.985} & \textit<3->{0.987} &  \textbf<4->{0.986} \\ \hline
+    5 & $e$ & \textbf<5->{Cat}  & \textit<2->{0.980} & \textit<3->{0.990} &  \textbf<4->{0.985} \\ \hline
+    6 & $f$ & \textbf<5->{Cat}  & \textit<2->{0.978} & \textit<3->{0.990} &  \textbf<4->{0.984} \\ \hline
+    7 & $g$ & \textbf<5->{Cat}  & \textit<2->{0.980} & \textit<3->{0.984} &  \textbf<4->{0.982} \\ \hline
+    8 & $h$ & Chicken           & \textit<2->{0.952} & \textit<3->{0.960} &  \textbf<4->{0.956} \\ \hline
+    %9 & $i$ & Chicken   & 0.952 & 0.946 &  0.948 \\ \hline
+\end{tabular}
+%\caption{An example classifying an unknown \isol{} \UNKNOWN{} using \rmean{} with \k{} = 8, where the mean function is the arithmetic average of the two \pcfunclabel{} values. The resulting classification is Cat.}
+\label{fig:meanwise:example}
+\end{figure}
+\vspace{-8pt}
+\rmean{}:
+\begin{enumerate}
+    \item Between \isols{}, average the \Ssixt{} and \Sfive{} similarity values
+    \item Sort all \isols{} by similarity value
+    \item Classify as the most dominant \spec{}
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\rwinner{}}{Determining the Winning Classification}
+\vspace{-8pt}
+\begin{figure}
+\centering
+\footnotesize
+\begin{subfigure}{0.45\linewidth}
+%\subfloat[A \k{} = 8 nearest neighbors list for the \Ssixt{} region of an unknown \isol{}.]{
+\begin{tabular}{c|c}
+     \k{} (\Ssixt{}) & \Spec{}  \\ \hline \hline
+     1 & \textbf<2-3>{Bat} \\ \hline
+     2 & \textbf<2-3>{Bat} \\ \hline
+     3 & Cat \\ \hline
+     4 & Pigeon \\ \hline
+     5 & Pigeon \\ \hline
+     6 & Human \\ \hline
+     7 & Human \\ \hline
+     8 & \textbf<2-3>{Bat} \\ \hline
+\end{tabular}
+%}
+\caption{\Ssixt{}}
+\end{subfigure}
+\quad
+\begin{subfigure}{0.45\linewidth}
+%\subfloat[A \k{} = 8 nearest neighbors list for the \Sfive{} region of an unknown \isol{}.]{
+\begin{tabular}{c|c}
+     \k{} (\Sfive{}) & \Spec{}  \\ \hline \hline
+     1 & \textbf<3-4>{Pigeon} \\ \hline
+     2 & Bat \\ \hline
+     3 & Cat \\ \hline
+     4 & \textbf<3-4>{Pigeon} \\ \hline
+     5 & Bat \\ \hline
+     6 & \textbf<3-4>{Pigeon} \\ \hline
+     7 & Cat \\ \hline
+     8 & \textbf<3-4>{Pigeon} \\ \hline
+\end{tabular}
+%}
+\caption{\Sfive{}}
+\end{subfigure}
+%\caption{In this example of \rwinner{} for \k{} = 8, \kNN{} on the \Ssixt{} region results in a classification of Bat, since there are 3 bats in its \knnlong{} list and \kNN{} on \Sfive{} results in Pigeon, since there are 4 Pigeons in its \knnlong{} list. The classification resulting from these two lists is Pigeon, since Pigeon shows up more in its original list.}
+%\caption{For \rwinner{}, since there are 3 bats in \Ssixt{} and 4 pigeons in \Sfive{}, the resulting classification is Pigeon.}
+\label{fig:winner:example}
+\end{figure}
+\vspace{-8pt}
+\rwinner{}:
+\begin{enumerate}
+    \item Find \knnlong{} for \Ssixt{} and \knnlong{} for \Sfive{}
+    \item Find the most dominant \spec{} in each list
+    \item Classify as the dominant \spec{} with the highest count in its original list
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\runion{}}{Combining Both Lists}
+\begin{figure}
+\centering
+\footnotesize
+\begin{subfigure}{0.45\linewidth}
+%\subfloat[A \k{} = 8 nearest neighbors list for the \Ssixt{} region of an unknown \isol{}.]{\label{fig:union:example:ssixt}
+\begin{tabular}{c|c}
+     \k{} (\Ssixt{}) & \Spec{}  \\ \hline \hline
+     1 & \textbf<4>{Dog} \\ \hline
+     2 & \textbf<2>{Human} \\ \hline
+     3 & \textbf<2>{Human} \\ \hline
+     4 & \textbf<2>{Human} \\ \hline
+     5 & \textbf<4>{Dog} \\ \hline
+     6 & \textbf<4>{Dog} \\ \hline
+     7 & \textbf<2>{Human} \\ \hline
+     8 & \textbf<2>{Human} \\ \hline
+\end{tabular}
+%}
+\caption{\Ssixt{}}
+\end{subfigure}
+\quad
+\begin{subfigure}{0.45\linewidth}
+%\subfloat[A \k{} = 8 nearest neighbors list for the \Sfive{} region of an unknown \isol{}.]{
+\label{fig:union:example:sfive}
+\begin{tabular}{c|c}
+     \k{} (\Sfive{}) & \Spec{}  \\ \hline \hline
+     1 & \textbf<3>{Turkey} \\ \hline
+     2 & \textbf<4>{Dog} \\ \hline
+     3 & \textbf<4>{Dog} \\ \hline
+     4 & \textbf<3>{Turkey} \\ \hline
+     5 & \textbf<3>{Turkey} \\ \hline
+     6 & \textbf<4>{Dog} \\ \hline
+     7 & \textbf<3>{Turkey} \\ \hline
+     8 & Cow \\ \hline
+\end{tabular}
+%}
+\caption{\Sfive{}}
+\end{subfigure}
+%\caption{For \runion{}, the \Ssixt{} has 5 humans and \Sfive{} has 4 turkeys. However, both have 3 dogs, for a total of 6 dogs between the two lists. Thus, the resulting classification is Dog.}
+\end{figure}
+\vspace{-8pt}
+\runion{}:
+\begin{enumerate}
+    \item Find \knnlong{} for \Ssixt{} and \knnlong{} for \Sfive{}
+    \item Combine the two lists into a single list, called ``the union''
+    \item Classify as the most dominant \spec{} in the union
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\rintersect{}}
+\rintersect{}:
+\begin{enumerate}
+    \item Find \knnlong{} for \Ssixt{} and \knnlong{} for \Sfive{}
+    \item Find \isols{} that appear in both lists
+    \item Build a \k{}-sized list of these \isols{}, called ``the intersection''
+    \item Extend both \knnlong{} lists, if necessary\footnote{stop at \a{}}
+    \item Classify as the most dominant \spec{} in the intersection
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\rintersect{}}{Finding \Isols{} in Both Lists}
+\begin{figure}
+\centering
+\tiny
+\begin{subfigure}{0.45\linewidth}
+    \begin{tabular}{c|c|c}
+     \k{} (\Ssixt{}) & \Isol{} ID & \Spec{} \\ \hline \hline
+     \textbf<4->{1} & \textbf<4->{5823} & \textbf<4->{Pig} \\ \hline
+     \textbf<2->{2} & \textbf<2->{2833} & \textbf<2->{Pig} \\ \hline
+     3 & 8873 & Cow \\ \hline
+     \textbf<3->{4} & \textbf<3->{5939} & \textbf<3->{Cow} \\ \hline
+     5 & 6156 & Cow \\ \hline
+     6 & 3676 & Human \\ \hline
+     7 & 7853 & Cow \\ \hline
+     8 & 5331 & Cow \\ \hline
+    \end{tabular}
+\caption{\Ssixt{}}
+\end{subfigure}
+\quad
+\begin{subfigure}{0.45\linewidth}
+    \begin{tabular}{c|c|c}
+     \k{} (\Ssixt{}) & \Isol{} ID & \Spec{} \\ \hline \hline
+     \textbf<2->{1} & \textbf<2->{2833} & \textbf<2->{Pig} \\ \hline
+     2 & 2916 & Cow \\ \hline
+     3 & 3813 & Human \\ \hline
+     \textbf<3->{4} & \textbf<3->{5939} & \textbf<3->{Cow} \\ \hline
+     5 & 6854 & Dog \\ \hline
+     \textbf<4->{6} & \textbf<4->{5823} & \textbf<4->{Pig} \\ \hline
+     7 & 2053 & Pig \\ \hline
+     8 & 8485 & Dog \\ \hline
+    \end{tabular}
+\caption{\Sfive{}}
+\end{subfigure}
+\caption{\rintersect{} searches both lists for \isols{} that appear in both in order to build a \k{}-sized list from which to classify.}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{\rintersect{}}{Finding \Isols{} in Both Lists}
+\begin{figure}
+\centering
+\tiny
+\begin{subfigure}{0.45\linewidth}
+\begin{tabular}{c|c|c}
+ \k{} (\Ssixt{})& \Isol{} ID    & \Spec{}           \\ \hline\hline
+ \bf 1          &\bf  5823      &\bf Pig            \\ \hline
+ \bf 2          &\bf  2833      &\bf Pig            \\ \hline
+ 3              &     8873      & Cow               \\ \hline
+ \bf 4          &\bf  5939      & \bf Cow           \\ \hline
+ 5              &     6156      & Cow               \\ \hline
+ 6              &     3676      & Human             \\ \hline
+ 7              &     7853      & Cow               \\ \hline
+ \textbf<6->{8}   &\textbf<6->{5331}& \textbf<6->{Cow}    \\ \hline\hline
+ 9              &     2189      & Cow               \\ \hline
+ \textbf<2->{10}  &\textbf<2->{2053}&\textbf<2->{Pig}     \\ \hline
+ \textbf<3->{11}  &\textbf<3->{8962}&\textbf<3->{Pig}     \\ \hline
+ \textbf<4->{12}  &\textbf<4->{3813}&\textbf<4->{Human}   \\ \hline
+ \textbf<5->{13}  &\textbf<5->{8173}&\textbf<5->{Pig}     \\ \hline
+\end{tabular}
+\caption{\Ssixt{}}
+\end{subfigure}
+\quad
+\begin{subfigure}{0.45\linewidth}
+\begin{tabular}{c|c|c}
+ \k{} (\Ssixt{})& \Isol{} ID        & \Spec{}           \\ \hline\hline
+ \bf 1          &\bf 2833           &\bf Pig            \\ \hline
+ 2              &    2916           & Cow               \\ \hline
+ \textbf<4->{3} & \textbf<4->{3813} & \textbf<4->{Human}  \\ \hline
+ \bf 4          &\bf 5939           &\bf Cow            \\ \hline
+ 5              &    6854           & Dog               \\ \hline
+ \bf 6          &\bf 5823           &\bf Pig            \\ \hline
+ \textbf<2->{7} &\textbf<2->{2053}  & \textbf<2->{Pig}    \\ \hline
+ 8              &    8485           & Dog               \\ \hline \hline
+ \textbf<5->{9} &\textbf<5->{8173}  &\textbf<5->{Pig}     \\ \hline
+ 10             &    6497           & Human             \\ \hline
+ 11             &    9208           & Cow               \\ \hline
+ \textbf<6->{12}&\textbf<6->{5331}  &\textbf<6->{Cow}     \\ \hline
+ \textbf<3->{13}&\textbf<3->{8962}  &\textbf<3->{Pig}     \\ \hline
+\end{tabular}
+\caption{\Sfive{}}
+\end{subfigure}
+\caption{\rintersect{} searches both lists for \isols{} that appear in both in order to build a \k{}-sized list from which to classify. We may need to extend the original \knnlong{} list in order to do so.}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{The Intersection List}
+\begin{figure}
+\centering
+\footnotesize
+\begin{tabular}{c|c|c|c}
+\k{} (\Ssixt{}) & \k{} (\Sfive{}) & \Isol{} ID & \Spec{} \\ \hline \hline
+ 2  & 1 & 2833 & \textbf<2->{Pig} \\ \hline %1.5
+ 1  & 6 & 5823 & \textbf<2->{Pig} \\ \hline %3.5
+ 4 & 4 & 5939 & Cow \\ \hline %4
+ 12 & 3 & 3813 & Human \\ \hline %7.5
+ 10 & 7 & 2053 & \textbf<2->{Pig} \\ \hline %8.5
+ 8 & 12 & 5331 & Cow \\ \hline %}10
+ 13 & 9 & 8173 &  \textbf<2->{Pig} \\ \hline %11
+ 11 & 13 & 8962 & \textbf<2->{Pig} \\ \hline %12
+\end{tabular}
+\caption{The \k{}-sized intersection formed from finding the \isols{} that appear in both \knnlong{} lists. The resulting classification is Pig.}
+\label{fig:intersection:example:intersection}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Evaluation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Evaluation}
+Experimental Technique:
+\begin{itemize}
+    \item Cross-Validation with Holdout
+\end{itemize}
+Evaluation Metrics:
+\begin{itemize}
+    \item Overall Accuracy
+    \item For \spec{}:
+    \begin{itemize}
+        \item   $R$: Recall
+        \item   $P$: Precision
+        \item   $F_1$: $F$-Measure:
+                \[
+                    F_1 
+                    =
+                    \frac{2}{\frac{1}{P}
+                    +
+                    \frac{1}{R}}
+                    = 2\cdot
+                    \frac{P\cdot R}
+                    {P + R}
+                \]
+    \end{itemize}
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Results}
+\newcommand{\krapfigure}[1]{\includegraphics[height=0.80\textheight]{#1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Overall Accuracy}{Increasing \k{}, No \a{} Filtering}
+\begin{figure}[t]
+\centering
+\krapfigure{figures/krap/Overall-ALL-metrics-12-0_000_new}
+%\caption{
+%The accuracy of all classifications performed with CPLOP across the four different algorithms with $\alpha=0.00$ shows little improvement for $k>5$. 
+%We look at only the percentage of correct classifications, since that value is equivalent to the precision and the recall.
+%}
+\label{fig:k_overall}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Cows}{Increasing \k{}, No \a{} Filtering}
+\begin{figure}
+\centering
+\krapfigure{figures/krap/Cow-ALL-metrics-12-0_000}
+%\caption{There are 1838 Cow \isol{}s in CPLOP. For most resolution algorithms, we observe little improvement when $k>5$.}
+\end{figure}
+\begin{tikzpicture}[remember picture,overlay, shift={(current page.center)}]
+    \node[align=center]   (purepoints) at (5cm,0)  {1,749 \Isols{}};
+\end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Cows}{Increasing \k{}, No \a{} Filtering}
+\begin{figure}
+\centering
+\krapfigure{figures/krap/Cow-ALL-pvr-12-0_000}
+%\caption{There are 1838 Cow \isol{}s in CPLOP. Looking at the Recall as it compares to the Precision for $\alpha=0.99$ allows us to visualize the tradeoffs we make when picking a $k$ value. Labeled within each datapoint is the $k$ value at that point}
+\end{figure}
+\begin{tikzpicture}[remember picture,overlay, shift={(current page.center)}]
+    \node[align=center]   (purepoints) at (5cm,0)  {1,749 \Isols{}};
+\end{tikzpicture}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Overall Accuracy}{Increasing \k{}, \a{} = 0.00, 0.98, 0.99}
+\begin{figure}[t]
+\centering
+\krapfigure{figures/krap/Overall-ALL-metrics-12-[-0_----0_98--0_99]}
+%\caption{Shown is the accuracy of all classifications performed with CPLOP across the four different algorithms. We find that the accuracy of certain resolution algorithms perform better with higher $\alpha$ values.}
+\label{fig:alpha_overall}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Nonuniformity and Underrepresentation}{Chickens}
+\begin{figure}[t]
+\centering
+\krapfigure{figures/krap/Chicken-ALL-metrics-12-0_000}
+%\caption{There are 40 Chicken \isol{}s in CPLOP. Unfortunately, due to their low representation in CPLOP, classification accuracy is low.}
+\label{fig:k_chicken}
+\end{figure}
+\begin{tikzpicture}[remember picture,overlay, shift={(current page.center)}]
+    \node[align=center]   (purepoints) at (5cm,0)  {44 \Isols{}};
+\end{tikzpicture}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Nonuniformity and Underrepresentation}{Cats}
+\begin{figure}[t]
+\centering
+\krapfigure{figures/krap/Cat-ALL-metrics-12-0_000}
+%\caption{There are 40 Chicken \isol{}s in CPLOP. Unfortunately, due to their low representation in CPLOP, classification accuracy is low.}
+\label{fig:k_cat}
+\end{figure}
+\begin{tikzpicture}[remember picture,overlay, shift={(current page.center)}]
+    \node[align=center]   (purepoints) at (5cm,0)  {46 \Isols{}};
+\end{tikzpicture}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Nonuniformity and Underrepresentation}{Bats}
+\begin{figure}[t]
+\centering
+\krapfigure{figures/krap/Bat-ALL-metrics-12-0_000}
+%\caption{There are 40 Chicken \isol{}s in CPLOP. Unfortunately, due to their low representation in CPLOP, classification accuracy is low.}
+\label{fig:k_bat}
+\end{figure}
+\begin{tikzpicture}[remember picture,overlay, shift={(current page.center)}]
+    \node[align=center]   (purepoints) at (5cm,0)  {37 \Isols{}};
+\end{tikzpicture}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Conclusion}
+Clustering for Bacterial Strains with \dbscan{}
+\begin{itemize}
+    \item Benefits
+        \begin{itemize}
+            \item Offline clustering and simple membership check $\Rightarrow$ \textbf{fast}
+            \item Most clusters are pure
+            \item Most clusters have low number of unique \spec{}
+            \item Transient strains are visible and few in number
+        \end{itemize}
+    \item Drawbacks
+        \begin{itemize}
+            \item Might not classify all \isols{}
+        \end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}{Conclusion}{\krap{}}
+\krap{}:
+\begin{itemize}
+    \item Observations
+    \begin{itemize}
+        \item $5 \leq{} \k{} \leq{} 10$
+        \item \a{} generally improves classification
+    \end{itemize}
+    \item Performance
+    \begin{enumerate}
+        \item \rintersect{} performed best with \a{} filtering:
+        \begin{itemize}
+            \item \a{} = 0.00: 74.7\%
+            \item \a{} = 0.98: 78.0\%
+            \item \a{} = 0.99: 85.9\%
+        \end{itemize}
+        \item \runion{} performs very well:
+        \begin{itemize}
+            \item Without \a{} filtering, it classifies best:  76.4\%  accuracy overall
+            \item With \a{} filtering: minimal improvement
+        \end{itemize}
+        \item \rmean{}: 73.2\% overall accuracy.
+        \item \rwinner{}: 65\% to 68\% accuracy
+    \end{enumerate}
+    \item Drawbacks
+    \begin{itemize}
+        \item Difficulty with underrepresented \spec{}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}{Conclusion}{Future Work}
+Future Work
+\begin{itemize}
+    \item Retooling \cplop{} for automatic \mst{}
+    \item Does combining these two (\kNClong{}) help \mst{}?
+    \item Efficient study
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Questions?}
+    \centering
+    \Large
+    Questions?
+\end{frame}
+
+\begin{frame}
+\centering
+\large
+    This presentation was shamelessly created in 
+
+\Huge
+\rmfamily
+    \LaTeX{}
+\end{frame}
+
+%%%%% CITATIONS %%%%%
+\begin{frame}[t, allowframebreaks]
+    \tiny
+    %\nocite{*}
+    \nocite{DBLP:conf/bibm/McGovernDKBVG15, DBLP:conf/bcb/McGovernJDBKV16}
+    \frametitle<presentation>{References}
+    \setbeamertemplate{bibliography item}[text]
+    \bibliographystyle{plain}
+    \bibliography{999bibliography}
+\end{frame}
+
+
+\end{document}
+%%%%% END DOCUMENT %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%

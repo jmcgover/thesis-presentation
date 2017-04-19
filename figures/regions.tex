@@ -1,0 +1,98 @@
+%\begin{tikzpicture}[scale=1.2]
+%% Draw three filled circles for points a,x,b, and define 
+%% them as TikZ nodes
+%\footnotesize
+%
+%\coordinate (a) at (0,0);
+%\coordinate (b) at (1,0);
+%\coordinate (c) at (2,0);
+%\coordinate (d) at (3,0);
+%\coordinate (e) at (4,0);
+%\coordinate (f) at (5,0);
+%\coordinate (g) at (6,0);
+%\coordinate (h) at (7,0);
+%
+%
+%% Label the points
+%\draw[line width=1pt]  (a) -- (h);
+%\draw[line width=5pt] (b) -- (c);
+%\draw[line width=5pt] (d) -- (e);
+%\draw[line width=5pt] (f) -- (g);
+%
+%\node at (1.5,0)[above=5pt] {\Gsixt{}};
+%\node at (3.5,0)[above=5pt] {\Gtwen{}};
+%\node at (5.5,0)[above=5pt] {\Gfive{}};
+%
+%\draw[thick, decorate,decoration={brace,amplitude=5pt, mirror}] (c) -- (d)
+%node [black,midway,below=5pt] {\Ssixt{}};
+%
+%\draw[line width=1pt, decorate,decoration={brace,amplitude=5pt, mirror}] (e) -- (f)
+%node [black,midway,below=5pt] {\Sfive{}};
+%
+%\end{tikzpicture}
+
+\newsavebox\greyBox
+\begin{lrbox}{\greyBox}
+\begin{tikzpicture}[scale=0.04]
+\draw[fill=gray] (-1,5)rectangle(1,-5);
+\end{tikzpicture}
+\end{lrbox}
+
+\newsavebox\blackBox
+\begin{lrbox}{\blackBox}
+\begin{tikzpicture}[scale=0.04]
+\draw[fill=black] (-1,5)rectangle(1,-5);
+\end{tikzpicture}
+\end{lrbox}
+
+\newsavebox\region
+\begin{lrbox}{\region}
+\begin{tikzpicture}[scale=1.5]
+% Draw three filled circles for points a,x,b, and define 
+% them as TikZ nodes
+\footnotesize
+
+\coordinate (a) at (0,0);
+\coordinate (b) at (1,0);
+\coordinate (c) at (2,0);
+\coordinate (d) at (3,0);
+\coordinate (e) at (4,0);
+\coordinate (f) at (5,0);
+\coordinate (g) at (6,0);
+\coordinate (h) at (7,0);
+
+
+% Label the points
+\draw  (a) -- (b);
+\draw[thick, color=cpgreen] (c)--(d);
+\draw[thick, color=cpgold] (e)--(f);
+\draw  (g) -- (h);
+\draw[fill=white] (1,5pt)rectangle(2,-5pt) node[pos=.5]{\Gsixt{}};
+\draw[fill=white] (3,5pt)rectangle(4,-5pt) node[pos=.5](gtwen){\Gtwen{}{}};
+\draw[fill=white] (5,5pt)rectangle(6,-5pt) node[pos=.5]{\Gfive{}};
+
+
+\node[below of=gtwen, text width=30, align=center, yshift=8pt] (rna) {rRNA Operon};
+\coordinate[below of=rna, yshift=-8pt] (bottom);
+
+\draw[dashed](bottom)--(a);
+\draw[dashed](bottom)--(h);
+
+\draw[decorate,decoration={brace,amplitude=5pt}] (c) -- (d)
+node [black,midway,above=5pt] {\Ssixt{}};
+\draw[decorate,decoration={brace,amplitude=5pt}] (e) -- (f)
+node [black,midway,above=5pt] {\Sfive{}};
+\end{tikzpicture}
+\end{lrbox}
+
+\begin{tikzpicture}[scale=2]
+    \draw (0,0) circle (1);
+    \node (top) at (90:1) {\usebox\greyBox};
+    \node[rotate around={170:(0,0)}] at (80:1) {\usebox\greyBox};
+    \node[rotate around={10:(0,0)}] at (100:1) {\usebox\blackBox};
+    \node[rotate around={20:(0,0)}] at (110:1) {\usebox\blackBox};
+    \node[rotate around={30:(0,0)}] at (120:1) {\usebox\greyBox};
+    \node[rotate around={90:(0,0)}] at (180:1) {\usebox\blackBox};
+    \node[rotate around={160:(0,0)}] at (250:1) {\usebox\blackBox};
+    \node[above of=top, yshift=16pt] {\usebox\region};
+\end{tikzpicture}

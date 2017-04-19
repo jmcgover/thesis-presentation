@@ -1,0 +1,72 @@
+
+\begin{figure}
+\centering
+\subfloat[A \k{} = 8 nearest neighbors list for the \Ssixt{} region of an unknown \isol{}.]{\label{fig:union:example:ssixt}
+\begin{tabular}{c|c}
+     \k{} (\Ssixt{}) & \Spec{}  \\ \hline \hline
+     1 & Dog \\ \hline
+     2 & Human \\ \hline
+     3 & Human \\ \hline
+     4 & Human \\ \hline
+     5 & Dog \\ \hline
+     6 & Cow \\ \hline
+     7 & Human \\ \hline
+     8 & Dog \\ \hline
+\end{tabular}
+}
+\quad
+\subfloat[A \k{} = 8 nearest neighbors list for the \Sfive{} region of an unknown \isol{}.]{\label\label{fig:union:example:sfive}
+\begin{tabular}{c|c}
+     \k{} (\Sfive{}) & \Spec{}  \\ \hline \hline
+     1 & Turkey \\ \hline
+     2 & Dog \\ \hline
+     3 & Dog \\ \hline
+     4 & Turkey \\ \hline
+     5 & Turkey \\ \hline
+     6 & Cow \\ \hline
+     7 & Turkey \\ \hline
+     8 & Dog \\ \hline
+\end{tabular}
+}
+\\
+\subfloat[Resulting union of the \knnlong{} lists from each \itsshort{} region.]{\label{fig:union:example:union}
+\begin{tabular}{c|c|c}
+    Region      & \k{}  & \Spec{}\\ \hline \hline
+    \Ssixt{}    & 1     & Dog \\ \hline
+    \Sfive{}    & 1     & Turkey \\ \hline
+    \Ssixt{}    & 2     & Human \\ \hline
+    \Sfive{}    & 2     & Dog \\ \hline
+    \Ssixt{}    & 3     & Human \\ \hline
+    \Sfive{}    & 3     & Dog \\ \hline
+    \Ssixt{}    & 4     & Human \\ \hline
+    \Sfive{}    & 4     & Turkey \\ \hline
+    \Ssixt{}    & 5     & Dog \\ \hline
+    \Sfive{}    & 5     & Turkey \\ \hline
+    \Ssixt{}    & 6     & Cow \\ \hline
+    \Sfive{}    & 6     & Cow \\ \hline
+    \Ssixt{}    & 7     & Human \\ \hline
+    \Sfive{}    & 7     & Turkey \\ \hline
+    \Ssixt{}    & 8     & Dog \\ \hline
+    \Sfive{}    & 8     & Dog \\ \hline
+\end{tabular}
+}
+\quad
+\subfloat[\Spec{} counts of all three lists, \Ssixt{}, \Sfive{}, and the union of the two.]{
+\begin{tabular}{c|c|c}
+List & \Spec{} & Count \\\hline \hline
+\Ssixt{} & Human & 4 \\\hline
+\Ssixt{} & Dog & 3 \\\hline
+\Ssixt{} & Cow & 1 \\\hline
+\Ssixt{} & Turkey & 4 \\\hline
+\Ssixt{} & Dog & 3 \\\hline
+\Ssixt{} & Cow & 1 \\\hline \hline
+Union & Dog & 6 \\\hline
+Union & Turkey & 4 \\\hline
+Union & Human & 4 \\\hline
+Union & Cow & 2 \\\hline
+\end{tabular}
+}
+\caption{In this example of \runion{} for \k{} = 8, we see that when considering each \itsshort{} \knnlong{} list separately, there are two different dominant \spec{} --- Human for \Ssixt{} and Turkey for \Sfive{} --- but when we look at the union of these two lists, Dog is the dominant \spec{}.
+}
+\label{fig:union:example}
+\end{figure}

@@ -1,0 +1,106 @@
+% MACROS
+\newcommand{\dbscanscale}{1.75}
+% COLORS
+\newcommand{\corecolor}{cpgreen}
+\newcommand{\bordercolor}{cpgold}
+\newcommand{\noisecolor}{gray}
+
+% CORE
+\newcommand{\corepointraw}[1]{
+    \draw [fill=\corecolor] (#1) circle (.125)
+}
+\newcommand{\coreneighborhood}[1]{
+    \draw (#1) circle (1)
+}
+\newcommand{\corepoint}[1]{
+    \corepointraw{#1};
+    \coreneighborhood{#1};
+}
+
+% BORDER
+\newcommand{\borderpointraw}[1]{
+    \draw [fill=\bordercolor] (#1) circle (.125)
+}
+\newcommand{\borderneighborhood}[1]{
+    \draw[dashed] (#1) circle (1)
+}
+\newcommand{\borderpoint}[1]{
+    \borderpointraw{#1};
+    \borderneighborhood{#1};
+}
+% NOISE
+\newcommand{\noisepointraw}[1]{
+    \draw [fill=\noisecolor] (#1) circle (.125)
+}
+\newcommand{\noisepoint}[1]{
+    \noisepointraw{#1};
+    %\borderneighborhood{#1};
+}
+\newcommand{\coreradius}{0.80}
+\newcommand{\borderradius}{1.4}
+\newcommand{\noiseradiussmall}{2}
+\newcommand{\noiseradiusmed}{2.85}
+
+% FIGURE
+\begin{figure}
+\captionsetup[subfigure]{width=\textwidth}
+\centering
+%\subfloat[
+%    In order to cluster using \dbscan{}, one must programmatically inspect the \eps{} neighborhood of each datapoint.
+%]{
+%    \begin{tikzpicture}[scale=\dbscanscale]
+%        \noisepointraw{0:0};
+%        \borderneighborhood{0:0};
+%    \end{tikzpicture}
+%}\quad
+%\subfloat[
+%    Categorizing datapoints as either Core Points, Border Points, or Noise is simply a matter of counting how many neighbors fall within a point's neighborhood.
+%]{
+    \begin{tikzpicture}[scale=\dbscanscale]
+    % Core Points
+    \corepoint{0:0}
+    \corepoint{0:\coreradius}
+    \corepoint{120:\coreradius}
+    \corepoint{240:\coreradius}
+    
+    % Border Points
+    \borderpoint{ 90:\borderradius}
+    \borderpoint{150:\borderradius}
+    
+    \borderpoint{210:\borderradius}
+    \borderpoint{270:\borderradius}
+    
+    \borderpoint{ 30:\borderradius}
+    \borderpoint{330:\borderradius}
+    
+    % Noise Points
+    \noisepoint{ 20:\noiseradiussmall}
+    \noisepoint{ 90:\noiseradiussmall}
+    
+    \noisepoint{  0:\noiseradiusmed}
+    \noisepoint{180:\noiseradiusmed}
+    
+    \noisepoint{ 60:\noiseradiusmed}
+    \noisepoint{120:\noiseradiusmed}
+    \noisepoint{300:\noiseradiusmed}
+    \noisepoint{240:\noiseradiusmed}
+    
+    \noisepoint{220:\noiseradiussmall}
+    \noisepoint{260:\noiseradiussmall}
+    \noisepoint{340:\noiseradiussmall}
+    \end{tikzpicture}
+    
+    \vspace{12pt}
+    \begin{tikzpicture}[scale = \dbscanscale]
+    \corepointraw{0:0}       node[anchor=west, xshift=4pt] {Core Point};
+    \borderpointraw{270:.4}  node[anchor=west, xshift=4pt] {Border Point};
+    \noisepointraw{270:.8}  node[anchor=west, xshift=4pt] {Noise};
+    \draw[dashed] (270:1.2) circle (0.125) node[anchor=west, xshift=4pt] {\eps{}-Neighborhood};
+    \end{tikzpicture}
+%}
+\caption{A basic density-based clustering with \minneigh{} = 3 points and a unit \eps{} represented by the circles --- solid for the core neighborhoods and dashed for border (recreated from \cite{johnson2015density}).
+We see that the green points each contain 3 neighbors, but while the border points do not, they are within \eps{} of a core point and we thus cluster it along with the core points.
+The (single) cluster that results from this set of datapoints are the green and gold points depicted.
+}
+\label{fig:density-based-clustering}
+\end{figure}

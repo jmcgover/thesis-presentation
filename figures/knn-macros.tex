@@ -1,0 +1,26 @@
+%%%%%%%%%% MACROS %%%%%%%%%%
+\newcommand{\coordsize}{10}
+\newcommand{\gridextra}{0.5}
+\newcommand{\circleradius}{0.4}
+\newcommand{\unknowncolor}{white}
+\newcommand{\acolor}{cpgreen}
+\newcommand{\bcolor}{cpgold}
+\newcommand{\ccolor}{cpgreengold}
+\newcommand{\unknownchar}{?}
+\newcommand{\achar}{$A$}
+\newcommand{\bchar}{$B$}
+\newcommand{\cchar}{$C$}
+\newcommand{\ac}{\color{white}}
+\newcommand{\drawunknownpoint}[2]{
+\draw[thick, fill=\unknowncolor] (#1) circle (\circleradius) node[] (#2) {\unknownchar}
+}
+\newcommand{\drawapoint}[2]{
+\draw[thick, fill=\acolor] (#1) circle (\circleradius) node[text=white] (#2) {\achar}
+}
+\newcommand{\drawbpoint}[2]{
+\draw[thick, fill=\bcolor] (#1) circle (\circleradius) node[] (#2) {\bchar}
+}
+\newcommand{\drawcpoint}[2]{
+\draw[thick, fill=\ccolor] (#1) circle (\circleradius) node[] (#2) {\cchar}
+}
+\newcommand{\knngraphscale}{0.60}

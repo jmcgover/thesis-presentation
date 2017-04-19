@@ -1,0 +1,33 @@
+\begin{table}[t]
+\centering
+\caption{Precision ($P$), Recall ($R$), and $F$-Measure ($F_1$) overall and for particular species at $k$=7, $\alpha=0.00$.}
+\begin{tabular}{llllllll}
+\cline{3-8}
+                                  & \multicolumn{1}{l|}{}             & \multicolumn{3}{c|}{Meanwise}                                                  & \multicolumn{3}{c|}{Winner}                                                    \\ \hline
+\multicolumn{1}{|l|}{\Spec{}} & \multicolumn{1}{l|}{$|$\Isol{}s$|$} & \multicolumn{1}{c}{$P$} & \multicolumn{1}{c}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c}{$P$} & \multicolumn{1}{c}{$R$} & \multicolumn{1}{c|}{$F_1$} \\ \hline
+\multicolumn{1}{|l|}{Overall}     & \multicolumn{1}{l|}{4682}         & 0.732                   & 0.732                   & \multicolumn{1}{l|}{0.732} & 0.659                   & 0.659                   & \multicolumn{1}{l|}{0.659} \\
+\multicolumn{1}{|l|}{Human}       & \multicolumn{1}{l|}{1471}         & 0.857                   & 0.922                   & \multicolumn{1}{l|}{0.888} & 0.771                   & 0.861                   & \multicolumn{1}{l|}{0.814} \\
+\multicolumn{1}{|l|}{Cow}         & \multicolumn{1}{l|}{1718}         & 0.757                   & 0.885                   & \multicolumn{1}{l|}{0.816} & 0.744                   & 0.776                   & \multicolumn{1}{l|}{0.760} \\
+\multicolumn{1}{|l|}{Pigeon}      & \multicolumn{1}{l|}{194}          & 0.420                   & 0.242                   & \multicolumn{1}{l|}{0.307} & 0.280                   & 0.253                   & \multicolumn{1}{l|}{0.266} \\
+\multicolumn{1}{|l|}{Dog}         & \multicolumn{1}{l|}{149}          & 0.596                   & 0.436                   & \multicolumn{1}{l|}{0.504} & 0.449                   & 0.356                   & \multicolumn{1}{l|}{0.397} \\
+\multicolumn{1}{|l|}{Wild Turkey} & \multicolumn{1}{l|}{72}           & 0.383                   & 0.250                   & \multicolumn{1}{l|}{0.303} & 0.277                   & 0.181                   & \multicolumn{1}{l|}{0.219} \\
+\multicolumn{1}{|l|}{Chicken}     & \multicolumn{1}{l|}{40}           & 0.182                   & 0.050                   & \multicolumn{1}{l|}{0.078} & 0.143                   & 0.075                   & \multicolumn{1}{l|}{0.098} \\
+\multicolumn{1}{|l|}{Cat}         & \multicolumn{1}{l|}{39}           & 0.571                   & 0.308                   & \multicolumn{1}{l|}{0.400} & 0.438                   & 0.359                   & \multicolumn{1}{l|}{0.395} \\
+\multicolumn{1}{|l|}{Bat}         & \multicolumn{1}{l|}{37}           & 0.857                   & 0.973                   & \multicolumn{1}{l|}{0.911} & 0.692                   & 0.973                   & \multicolumn{1}{l|}{0.809} \\
+\multicolumn{1}{|l|}{Seagull}     & \multicolumn{1}{l|}{11}           & 0.000                   & 0.000                   & \multicolumn{1}{l|}{0.000} & 0.000                   & 0.000                   & \multicolumn{1}{l|}{0.000} \\ \hline
+                                  &                                   &                         &                         &                            &                         &                         &                            \\ \cline{3-8} 
+                                  & \multicolumn{1}{l|}{}             & \multicolumn{3}{c|}{Union}                                                     & \multicolumn{3}{c|}{Intersection}                                              \\ \hline
+\multicolumn{1}{|l|}{\Spec{}} & \multicolumn{1}{l|}{$|$\Isol{}s$|$} & \multicolumn{1}{c}{$P$} & \multicolumn{1}{c}{$R$} & \multicolumn{1}{c|}{$F_1$} & \multicolumn{1}{c}{$P$} & \multicolumn{1}{c}{$R$} & \multicolumn{1}{c|}{$F_1$} \\ \hline
+\multicolumn{1}{|l|}{Overall}     & \multicolumn{1}{l|}{4682}         & 0.764                   & 0.764                   & \multicolumn{1}{l|}{0.764} & 0.747                   & 0.747                   & \multicolumn{1}{l|}{0.747} \\
+\multicolumn{1}{|l|}{Human}       & \multicolumn{1}{l|}{1471}         & 0.843                   & 0.930                   & \multicolumn{1}{l|}{0.884} & 0.839                   & 0.925                   & \multicolumn{1}{l|}{0.880} \\
+\multicolumn{1}{|l|}{Cow}         & \multicolumn{1}{l|}{1718}         & 0.736                   & 0.944                   & \multicolumn{1}{l|}{0.827} & 0.769                   & 0.882                   & \multicolumn{1}{l|}{0.822} \\
+\multicolumn{1}{|l|}{Pigeon}      & \multicolumn{1}{l|}{194}          & 0.569                   & 0.170                   & \multicolumn{1}{l|}{0.262} & 0.470                   & 0.284                   & \multicolumn{1}{l|}{0.354} \\
+\multicolumn{1}{|l|}{Dog}         & \multicolumn{1}{l|}{149}          & 0.761                   & 0.450                   & \multicolumn{1}{l|}{0.566} & 0.649                   & 0.497                   & \multicolumn{1}{l|}{0.563} \\
+\multicolumn{1}{|l|}{Wild Turkey} & \multicolumn{1}{l|}{72}           & 0.688                   & 0.306                   & \multicolumn{1}{l|}{0.424} & 0.510                   & 0.361                   & \multicolumn{1}{l|}{0.423} \\
+\multicolumn{1}{|l|}{Chicken}     & \multicolumn{1}{l|}{40}           & 0.000                   & 0.000                   & \multicolumn{1}{l|}{0.000} & 0.250                   & 0.100                   & \multicolumn{1}{l|}{0.143} \\
+\multicolumn{1}{|l|}{Cat}         & \multicolumn{1}{l|}{39}           & 0.889                   & 0.410                   & \multicolumn{1}{l|}{0.561} & 0.571                   & 0.308                   & \multicolumn{1}{l|}{0.400} \\
+\multicolumn{1}{|l|}{Bat}         & \multicolumn{1}{l|}{37}           & 0.857                   & 0.973                   & \multicolumn{1}{l|}{0.911} & 0.857                   & 0.973                   & \multicolumn{1}{l|}{0.911} \\
+\multicolumn{1}{|l|}{Seagull}     & \multicolumn{1}{l|}{11}           &                      & 0.000                   & \multicolumn{1}{l|}{}   &                      & 0.000                   & \multicolumn{1}{l|}{}   \\ \hline
+\end{tabular}
+\label{tab:profile000}
+\end{table}

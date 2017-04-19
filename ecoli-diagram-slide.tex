@@ -1,0 +1,119 @@
+% UNUSED
+\newsavebox\greyBox
+\begin{lrbox}{\greyBox}
+\begin{tikzpicture}[scale=0.04]
+\draw[fill=gray] (-1,5)rectangle(1,-5);
+\end{tikzpicture}
+\end{lrbox}
+
+\newsavebox\blackBox
+\begin{lrbox}{\blackBox}
+\begin{tikzpicture}[scale=0.04]
+\draw[fill=black] (-1,5)rectangle(1,-5);
+\end{tikzpicture}
+\end{lrbox}
+
+\newsavebox\region
+\begin{lrbox}{\region}
+\begin{tikzpicture}
+
+% Draw three filled circles for points a,x,b, and define 
+% them as TikZ nodes
+\footnotesize
+
+\coordinate (a) at (0,0);
+\coordinate (b) at (1,0);
+\coordinate (c) at (2,0);
+\coordinate (d) at (3,0);
+\coordinate (e) at (4,0);
+\coordinate (f) at (5,0);
+\coordinate (g) at (6,0);
+\coordinate (h) at (7,0);
+
+% Label the points
+\draw  (a) -- (b);
+\draw[thick, color=cpgreen] (c)--(d);
+\draw[thick, color=cpgold] (e)--(f);
+\draw  (g) -- (h);
+\draw[fill=white] (1,5pt)rectangle(2,-5pt) node[pos=.5]{\Gsixt{}};
+\draw[fill=white] (3,5pt)rectangle(4,-5pt) node[pos=.5](gtwen){\Gtwen{}{}};
+\draw[fill=white] (5,5pt)rectangle(6,-5pt) node[pos=.5]{\Gfive{}};
+
+
+\node[below of=gtwen, text width=30, align=center, yshift=12pt] (rna) {rRNA Operon};
+\coordinate[below of=rna] (bottom);
+
+\draw[dashed](bottom)--(a);
+\draw[dashed](bottom)--(h);
+
+\draw[decorate,decoration={brace,amplitude=5pt}] (c) -- (d)
+node [black,midway,above=5pt] {\Ssixt{}};
+\draw[decorate,decoration={brace,amplitude=5pt}] (e) -- (f)
+node [black,midway,above=5pt] {\Sfive{}};
+\end{tikzpicture}
+\end{lrbox}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SIMPLE DNA
+\begin{frame}[t]{\Isols{}}{\ecoli{} \dna{}}
+\begin{center}
+Species $\leftarrow$
+%
+Host $\leftarrow$
+%
+Fecal Sample $\leftarrow$
+%
+{\bfseries \Isol{} $\leftarrow$}
+%
+\Pyro{}
+\end{center}
+\begin{figure}[ht]
+  \centering
+    \begin{tikzpicture}[scale=1]
+        \coordinate (center) at (0,0);
+        \draw (center) circle (1.5);
+        \node (top) at (90:1.5) {\usebox\greyBox};
+        \node[rotate around={170:(0,0)}] at (80:1.5) {\usebox\greyBox};
+        \node[rotate around={10:(0,0)}] at (100:1.5) {\usebox\blackBox};
+        \node[rotate around={20:(0,0)}] at (110:1.5) {\usebox\blackBox};
+        \node[rotate around={30:(0,0)}] at (120:1.5) {\usebox\greyBox};
+        \node[rotate around={90:(0,0)}] at (180:1.5) {\usebox\blackBox};
+        \node[rotate around={160:(0,0)}] at (250:1.5) {\usebox\blackBox};
+        \pause
+        %\node[above of=top, yshift=8pt] {\usebox\region};
+        
+        \footnotesize
+
+        \coordinate (a) at (-3.5,3.40);
+        \coordinate (b) at (-2.5,3.40);
+        \coordinate (c) at (-1.5,3.40);
+        \coordinate (d) at ( -.5,3.40);
+        \coordinate (e) at (  .5,3.40);
+        \coordinate (f) at ( 1.5,3.40);
+        \coordinate (g) at ( 2.5,3.40);
+        \coordinate (h) at ( 3.5,3.40);
+        
+        % Label the points
+        \draw  (a) -- (b);
+        \draw[thick, color=cpgreen] (c)--(d);
+        \draw[thick, color=cpgold] (e)--(f);
+        \draw  (g) -- (h);
+        \node (rect) at (-2,3.40) [draw, minimum width=1cm, minimum height=10pt, anchor=center] {\Gsixt{}};
+        \node (gtwen) at (0,3.40) [draw, minimum width=1cm, minimum height=10pt, anchor=center] {\Gtwen{}};
+        \node (rect) at (2,3.40) [draw, minimum width=1cm, minimum height=10pt, anchor=center] {\Gfive{}};
+        
+        \node[below of=gtwen, text width=30, align=center, yshift=8pt] (rna) {rRNA Operon};
+        \coordinate[below of=rna] (bottom);
+        
+        \draw[dashed](bottom)--(a);
+        \draw[dashed](bottom)--(h);
+        
+        \pause
+        \draw[decorate,decoration={brace,amplitude=5pt}] (c) -- (d)
+        node [black,midway,above=5pt] {\Ssixt{}};
+        \draw[decorate,decoration={brace,amplitude=5pt}] (e) -- (f)
+        node [black,midway,above=5pt] {\Sfive{}};
+    \end{tikzpicture}  
+    %\caption{\ecoli{} DNA, outlining the highly variable \Ssixt{} and \Sfive{} \itsshort{} regions, which repeat 7 times around the \ecoli{} genome.}
+  \label{fig:regions_printed}
+\end{figure}
+\end{frame}

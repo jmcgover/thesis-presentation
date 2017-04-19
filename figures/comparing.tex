@@ -1,0 +1,78 @@
+\newsavebox\chickenFiveOne
+\begin{lrbox}{\chickenFiveOne}
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[xticklabels={,,}, yticklabels={,,}, ticks=none, width=3in, height=1in]
+\addplot[ybar interval=1, color=cpgreen, fill=cpgreen] 
+table [col sep=comma] {data/pyroprints/ck005/4063.csv};
+\end{axis}
+\end{tikzpicture}
+\end{lrbox}
+
+\newsavebox\chickenFiveTwo
+\begin{lrbox}{\chickenFiveTwo}
+%\resizebox {3in} {1in} {
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[xticklabels={,,}, yticklabels={,,}, ticks=none, width=3in, height=1in]
+\addplot[ybar interval=1, color=cpgold, fill=cpgold] 
+table [col sep=comma] {data/pyroprints/ck005/4039.csv};
+\end{axis}
+\end{tikzpicture}
+\end{lrbox}
+
+\newsavebox\chickenSevenOne
+\begin{lrbox}{\chickenSevenOne}
+%\resizebox {3in} {1in} {
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[xticklabels={,,}, yticklabels={,,}, ticks=none, width=3in, height=1in]
+\addplot[ybar interval=1, color=cpgreen, fill=cpgreen] 
+table [col sep=comma] {data/pyroprints/ck007/4065.csv};
+\end{axis}
+\end{tikzpicture}
+\end{lrbox}
+
+\newsavebox\chickenSevenTwo
+\begin{lrbox}{\chickenSevenTwo}
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[xticklabels={,,}, yticklabels={,,}, ticks=none, width=3in, height=1in]
+\addplot[ybar interval=1, color=cpgold, fill=cpgold] table [col sep=comma] {data/pyroprints/ck007/4041.csv};
+\end{axis}
+\end{tikzpicture}
+\end{lrbox}
+\begin{tikzpicture}[node distance=.35in]
+    \node (origin) at (0, 0) {};
+    \node (chickenFiveOne) at (-2.25-\isolsep, 2) {
+        \usebox\chickenFiveOne
+    };
+    \node[below of=chickenFiveOne]{\Ssixt{}$_A$};
+    \node (chickenFiveTwo) at (-2.25-\isolsep, -2) {
+        \usebox\chickenFiveTwo
+    };
+    \node[below of=chickenFiveTwo]{\Sfive{}$_A$};
+    \node (chickenSevenOne) at (2.25+\isolsep, 2)  {
+        \usebox\chickenSevenOne
+    };
+    \node[below of=chickenSevenOne]{\Ssixt{}$_B$};
+    \node (chickenSevenTwo) at (2.25+\isolsep, -2) {
+        \usebox\chickenSevenTwo
+    };
+    \node[below of=chickenSevenTwo]{\Sfive{}$_B$};
+    
+    \node[above of=chickenFiveOne]{\Isol{} $A$};
+    \node[above of=chickenSevenOne]{\Isol{} $B$};
+    
+    %\draw[dashed] (-.5,-2.5)--(-4,-2.5)--(-4,2.5)--(-.5,2.5)--cycle;
+
+    %\draw[dashed]   (.5,-2.5)--(4,-2.5)--(4,2.5)--(.5,2.5)--cycle;
+    \draw[dashed] (-5-\isolsep,3.5) rectangle (-1.5,-3.5);
+    \draw[dashed] (5+\isolsep,3.5) rectangle (1.5,-3.5);
+
+    \path[<->]
+            (chickenFiveOne) 
+            edge[bend right] node[below, fill=white] {$\pcfunclabel(\text{\Ssixt{}}_A,\text{\Ssixt{}}_B)$} 
+            (chickenSevenOne)
+
+            (chickenFiveTwo) 
+            edge[bend right] node[below, fill=white] {$\pcfunclabel(\text{\Sfive{}}_A,\text{\Sfive{}}_B)$} 
+            (chickenSevenTwo)
+    ;
+\end{tikzpicture}

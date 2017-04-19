@@ -1,0 +1,40 @@
+\newsavebox\chickenFiveOne
+\begin{lrbox}{\chickenFiveOne}
+\begin{tikzpicture}[scale=0.5]
+\begin{axis}[xticklabels={,,}, yticklabels={,,}, ticks=none, width=3in, height=1in]
+\addplot[ybar interval=1, color=cpgreen, fill=cpgreen] 
+table [col sep=comma] {data/pyroprints/ck005/4063.csv};
+\end{axis}
+\end{tikzpicture}
+\end{lrbox}
+
+\newsavebox\chickenFiveTwo
+\begin{lrbox}{\chickenFiveTwo}
+%\resizebox {3in} {1in} {
+\begin{tikzpicture}[scale=0.5]
+\begin{axis}[xticklabels={,,}, yticklabels={,,}, ticks=none, width=3in, height=1in]
+\addplot[ybar interval=1, color=cpgold, fill=cpgold] 
+table [col sep=comma] {data/pyroprints/ck005/4039.csv};
+\end{axis}
+\end{tikzpicture}
+\end{lrbox}
+
+\newsavebox\chickenSevenOne
+\begin{lrbox}{\chickenSevenOne}
+%\resizebox {3in} {1in} {
+\begin{tikzpicture}[scale=0.5]
+\begin{axis}[xticklabels={,,}, yticklabels={,,}, ticks=none, width=3in, height=1in]
+\addplot[ybar interval=1, color=cpgreen, fill=cpgreen] 
+table [col sep=comma] {data/pyroprints/ck007/4065.csv};
+\end{axis}
+\end{tikzpicture}
+\end{lrbox}
+
+\newsavebox\chickenSevenTwo
+\begin{lrbox}{\chickenSevenTwo}
+\begin{tikzpicture}[scale=0.5]
+\begin{axis}[xticklabels={,,}, yticklabels={,,}, ticks=none, width=3in, height=1in]
+\addplot[ybar interval=1, color=cpgold, fill=cpgold] table [col sep=comma] {data/pyroprints/ck007/4041.csv};
+\end{axis}
+\end{tikzpicture}
+\end{lrbox}
